@@ -115,8 +115,8 @@ const Book = () => {
               <div className="container mt-3 bg-white shadow-lg p-3 mb-5 bg-white rounded">
               <div className="row">
                 <div className="col-md-12 d-flex justify-content-between">
-                <div className='text-grey h5'>Books</div>
-                  <Link to={'/addbooks'}><button className="btn btn-primary">+ Add New Book</button></Link>
+                <div className='text-grey h5'>Manage Books</div>
+                  <Link to={'/addbooks'}><button className="btn btn-primary">+ Add Book</button></Link>
                 </div>
               </div>
               <hr />
@@ -136,17 +136,17 @@ const Book = () => {
               {/* Table */}
               <div className="row mt-3">
                 <div className="col-md-12 table-responsive">
-                  <table className="table table-sm table-bordered table-striped table-hover table-rounded ">
+                  <table className="table table-sm  table-bordered  table-rounded ">
                     <thead className= 'table-light'>
                       <tr>
-                        <th scope="col">SNo</th>
-                        <th scope="col">Book</th>
-                        <th scope="col">Class</th>
-                        <th scope="col">Subject</th>
-                        <th scope="col">Series</th>
+                        <th scope="col">S.no</th>
+                        <th scope="col">Book Name</th>
+                        <th scope="col">Class Name</th>
+                        <th scope="col">Subject Name</th>
+                        <th scope="col">Series Name</th>
                         <th scope="col">Book Cover</th>
                         <th scope="col">Actions</th>
-                        <th scope="col">Popular</th>
+                        <th scope="col">Make Popular</th>
 
                       </tr>
                     </thead>

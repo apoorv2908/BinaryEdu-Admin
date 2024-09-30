@@ -103,23 +103,23 @@ const UpdateSeries = () => {
           <Topbar />
           {/* Main content */}
           <div className="col-md-12">
-            <div className="container mt-3">
+            <div className="container ">
               {/* Topbar */}
               <div className="row">
-                <div className="col-md-12 bg-white shadow-lg p-3 mb-5 bg-white rounded">
+                <div className="col-md-12 mt-3 bg-white shadow-lg p-3 mb-5 bg-white rounded">
                 <div className='text-grey h6'>Update Series</div>
                 <hr></hr>
                   <form onSubmit={handleSubmit}>
                     <label className= 'fw-bold'>Series</label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       placeholder='Enter Series Name'
                       value={seriesName}
                       onChange={(e) => setSeriesName(e.target.value)}
                     /><br /><br></br>
                     <label className= 'fw-bold'>Add Class</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={selectedClass}
                       onChange={(e) => setSelectedClass(e.target.value)}
                     >
@@ -130,7 +130,7 @@ const UpdateSeries = () => {
                     </select><br /><br></br>
                     <label className= 'fw-bold'>Add Subject</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={selectedSubject}
                       onChange={(e) => setSelectedSubject(e.target.value)}
                     >

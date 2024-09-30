@@ -1,54 +1,80 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Topbar from '../Dashboard/Topbar';
 import config from '../Access/config';
 
-const Updatebookpage = () => {
-  const { book_id } = useParams();
+const EditBookpages = () => {
+  const { page_id } = useParams();  // Get the page_id from the URL parameters
+  const [pageTitle, setPageTitle] = useState('');
+  const [chapterName, setChapterName] = useState('');
+  const [pageNumber, setPageNumber] = useState('');  // New state for page number
+  const [image, setImage] = useState(null);
+  const [bookName, setBookName] = useState('');
+  const [bookId, setBookId] = useState('');  // Store book_id fetched from fetchPageDetails
+
+  const [chapters, setChapters] = useState([]);
+  const [existingImagePath, setExistingImagePath] = useState('');  // Existing image path
   const navigate = useNavigate();
-  const [pageData, setPageData] = useState({ pageTitle: '', chapterName: '', image: null });
-  const [successMessage, setSuccessMessage] = useState('');
-  const [showPopup, setShowPopup] = useState(false);
 
+  // UseEffect to fetch page details and chapters
   useEffect(() => {
-    fetchPageData();
-  }, [book_id])
+    fetchPageDetails(); // Fetch details to populate fields
+  }, []);
 
-  const fetchPageData = async () => {
+  // Fetch the page details
+  const fetchPageDetails = async () => {
     try {
-      const response = await fetch(`${config.apiBaseUrl}/fullmarks-server/Resources/fetchpagedetails.php?book_id=${book_id}`);
+      const response = await fetch(`${config.apiBaseUrl}/fullmarks-server/Resources/getpagedetails.php?page_id=${page_id}`);
       const data = await response.json();
       if (data.success) {
-        setPageData({ pageTitle: data.bookPage.page_title, chapterName: data.bookPage.chapter_name, image: data.bookPage.image_path, pageNumber: data.bookPage.page_number  });
+        setPageTitle(data.page.page_title);
+        setChapterName(data.page.chapter_id);
+        setBookId(data.page.book_id); // Set bookId from page details
+        setPageNumber(data.page.page_number);
+        setBookName(data.page.book_name);
+        setExistingImagePath(data.page.image_path);
+
+        // Now that we have the book_id, fetch chapters
+        fetchChapters(data.page.book_id);  // Pass book_id to fetchChapters
       } else {
-        alert('Failed to fetch page data');
+        alert('Failed to fetch page details');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Error fetching page data');
+      alert('Error fetching page details');
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setPageData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+  // Fetch chapters based on book_id
+  const fetchChapters = async (bookId) => {
+    try {
+      const response = await fetch(`${config.apiBaseUrl}/fullmarks-server/Masterfilter/Chapters/fetchchapters.php?book_id=${bookId}`);
+      const data = await response.json();
+      if (data.success) {
+        setChapters(data.chapters);  // Set the chapters based on the fetched data
+      } else {
+        alert('Failed to fetch chapters');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error fetching chapters');
+    }
   };
 
-  const handleSubmit = async (e) => {
+  // Handle the update form submission
+  const handleUpdate = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('book_id', book_id);
-    formData.append('pageTitle', pageData.pageTitle);
-    formData.append('chapterName', pageData.chapterName);
-    formData.append('page_number', pageData.pageNumber);
 
-    if (pageData.image) {
-      formData.append('image', pageData.image);
+    const formData = new FormData();
+    formData.append('pageTitle', pageTitle);
+    formData.append('chapterName', chapterName);
+    formData.append('pageNumber', pageNumber);  
+    formData.append('page_id', page_id);  
+    if (image) {
+      formData.append('image', image);
     }
+
     try {
       const response = await fetch(`${config.apiBaseUrl}/fullmarks-server/Resources/updatebookpage.php`, {
         method: 'POST',
@@ -56,18 +82,13 @@ const Updatebookpage = () => {
       });
       const data = await response.json();
       if (data.success) {
-        setSuccessMessage('Page updated successfully');
-        setShowPopup(true);
-        setTimeout(() => {
-          setShowPopup(false);
-          navigate('/managebookpages');
-        }, 2000); // Show pop-up for 2 seconds before navigating
+        navigate("/bookpages");
       } else {
-        alert('Failed to update page');
+        alert('Failed to update book page');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Error updating page');
+      alert('Error updating book page');
     }
   };
 
@@ -80,101 +101,57 @@ const Updatebookpage = () => {
             <div className="container mt-3">
               <div className="row">
                 <div className="col-md-12 bg-white shadow-lg p-3 mb-5 bg-white rounded">
-                <div className='text-grey h6'>Update Book Page</div>
-                <hr></hr>
-                  <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                      <label htmlFor="pageTitle" className='mb-2'><b>Page Title</b></label>
-                      <input
-                        type="text"
-                        className="custom-input cursor"
-                        id="pageTitle"
-                        name="pageTitle"
-                        value={pageData.pageTitle}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                    <br></br>
-                    <div className="form-group">
-                      <label htmlFor="pageNumber" className='mb-2'><b>Page Number</b></label>
-                      <input
-                        type="text"
-                        className="custom-input cursor"
-                        id="pageNumber"
-                        name="pageNumber"
-                        value={pageData.pageNumber}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                    <br />
-                    <div className="form-group">
-                      <label htmlFor="chapterName" className='mb-2'><b>Chapter Name</b></label>
-                      <input
-                        type="text"
-                        className="custom-input cursor"
-                        id="chapterName"
-                        name="chapterName"
-                        value={pageData.chapterName}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                    <br />
-                    <div className="form-group">
-  <label htmlFor="image" className='mb-2'><b>Upload Image</b></label>
-  {pageData.image ? (
-    <div className="d-flex align-items-center">
-      {typeof pageData.image === 'object' && (
-        <img src={`http://localhost/fullmarks-server/uploads/${pageData.image}`} alt="Loaded Image" className="mr-2" style={{ width: '100px' }} />
-      )}
-      <button type="button" className="btn btn-outline-danger btn-sm" onClick={() => setPageData({ ...pageData, image: null })}>Cancel</button>
-    </div>
-  ) : (
-    <input
-      type="file"
-      className="cursor"
-      id="image"
-      name="image"
-      accept=".png, .jpg, .jpeg"
-      onChange={(e) => setPageData({ ...pageData, image: e.target.files[0] })}
-    />
-  )}
-</div>
+                  <div className='text-grey h6'>Update Book Page - {bookName}</div>
+                  <hr></hr>
+                  <form onSubmit={handleUpdate}>
+                    <label className='fw-bold'>Page Title</label><br />
+                    <input
+                      className='custom-input  cursor'
+                      placeholder='Enter Page Title'
+                      value={pageTitle}
+                      required
+                      onChange={(e) => setPageTitle(e.target.value)}
+                    /><br /><br />
 
-                    <br />
+                    <label className='fw-bold'>Chapter Name</label><br />
+                    <select
+                      className='custom-input  cursor'
+                      value={chapterName}
+                      required
+                      onChange={(e) => setChapterName(e.target.value)}
+                    >
+                      <option value="">Select Chapter</option>
+                      {chapters.map((chapter) => (
+                        <option key={chapter.chapter_id} value={chapter.chapter_id}>{chapter.chapter_title}</option>
+                      ))}
+                    </select><br /><br />
+
+                    <label className='fw-bold mb-2'>Upload Image</label><br />
+                    {existingImagePath && (
+                      <div>
+                        <img src={`${config.apiBaseUrl}/fullmarks-server/uploads/book_pages/${existingImagePath}`} alt="Existing" width="100" />
+                      </div>
+                    )}
+                    <p className= 'mt-2'>Choose New File? </p>
+                    <input
+                      type="file"
+                      className='  cursor form-control mt-3'
+                      accept=".png, .jpg, .jpeg"
+                      onChange={(e) => setImage(e.target.files[0])}
+                    /><br /><br />
+
                     <div className='d-flex justify-content-end'>
-                      <button type="submit" className="btn btn-primary d-flex">Update Page</button>
+                      <button type="submit" className="btn btn-primary mt-3">Update Page</button>
                     </div>
                   </form>
-                  {showPopup && (
-                    <div className="popup">
-                      {successMessage}
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      {/* Pop-up CSS */}
-      <style jsx>{`
-        .popup {
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          background: #f0f0f0;
-          padding: 20px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-          border-radius: 5px;
-          z-index: 1000;
-        }
-      `}</style>
     </div>
   );
 };
 
-export default Updatebookpage;
+export default EditBookpages;

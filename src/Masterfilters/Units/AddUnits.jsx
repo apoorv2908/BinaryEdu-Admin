@@ -108,7 +108,7 @@ const Addunits = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ selectedClass, selectedSubject, selectedSeries, selectedBook, selectedSection, unitTitle }),
+        body: JSON.stringify({ selectedClass, selectedSubject, selectedSeries, selectedBook,  selectedSection: selectedSection || '', unitTitle }),
       });
       const data = await response.json();
       if (data.success) {
@@ -135,79 +135,79 @@ const Addunits = () => {
               {/* Topbar */}
               <div className="row">
                 <div className="col-md-12 bg-white shadow-lg p-3 mb-5 bg-white rounded">
-                  <div className='text-grey h6'>Add Unit</div>
+                  <div className='text-grey h6 fw-bold'>Add Unit</div>
                   <hr></hr>
                   <form onSubmit={handleSubmit}>
-                    <label className='fw-bold'>Class</label><br />
+                    <label className='fw-bold'>Class<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={selectedClass}
                       onChange={(e) => {
                         setSelectedClass(e.target.value);
                         fetchSubjects(e.target.value);
                       }}
                     >
-                      <option value="">Select Class</option>
+                      <option value="">--Select Class--</option>
                       {classes.map((cls) => (
                         <option key={cls.class_id} value={cls.class_id}>{cls.class_name}</option>
                       ))}
                     </select><br /><br></br>
-                    <label className='fw-bold'>Subject</label><br />
+                    <label className='fw-bold'>Subject<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={selectedSubject}
                       onChange={(e) => {
                         setSelectedSubject(e.target.value);
                         fetchSeries(selectedClass, e.target.value);
                       }}
                     >
-                      <option value="">Select Subject</option>
+                      <option value="">--Select Subject--</option>
                       {subjects.map((sub) => (
                         <option key={sub.subject_id} value={sub.subject_id}>{sub.subject_name}</option>
                       ))}
                     </select><br /><br></br>
-                    <label className='fw-bold'>Series</label><br />
+                    <label className='fw-bold'>Series<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={selectedSeries}
                       onChange={(e) => {
                         setSelectedSeries(e.target.value);
                         fetchBooks(selectedClass, selectedSubject, e.target.value);
                       }}
                     >
-                      <option value="">Select Series</option>
+                      <option value="">--Select Series--</option>
                       {series.map((ser) => (
                         <option key={ser.series_id} value={ser.series_id}>{ser.series_name}</option>
                       ))}
                     </select><br /><br></br>
-                    <label className='fw-bold'>Book</label><br />
+                    <label className='fw-bold'>Book<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={selectedBook}
                       onChange={(e) => {
                         setSelectedBook(e.target.value);
                         fetchSections(e.target.value);
                       }}
                     >
-                      <option value="">Select Book</option>
+                      <option value="">--Select Book--</option>
                       {books.map((book) => (
                         <option key={book.book_id} value={book.book_id}>{book.book_name}</option>
                       ))}
                     </select><br /><br></br>
                     <label className='fw-bold'>Section</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={selectedSection}
                       onChange={(e) => setSelectedSection(e.target.value)}
                     >
-                      <option value="">Select Section</option>
+                      <option value="">--Select Section--</option>
                       {sections.map((sec) => (
                         <option key={sec.section_id} value={sec.section_id}>{sec.section_name}</option>
                       ))}
                     </select><br /><br></br>
-                    <label className='fw-bold'>Unit Title</label><br />
+                    <label className='fw-bold'>Unit Title<span className= 'text-danger'>*</span></label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       placeholder='Enter Unit Title'
                       value={unitTitle}
                       onChange={(e) => setUnitTitle(e.target.value)}

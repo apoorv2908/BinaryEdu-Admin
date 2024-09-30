@@ -161,115 +161,120 @@ const Addstudents = () => {
               {/* Topbar */}
               <div className="row">
                 <div className="col-md-12 bg-white shadow-lg p-3 mb-5 bg-white rounded">
-                  <div className='text-grey h5'>Add Student</div>
+                  <div className='text-grey fw-bold h6'>Add Student</div>
                   <hr />
                   <form onSubmit={handleSubmit} encType="multipart/form-data">
-                    <label className='fw-bold'>Student Name</label><br />
+                    <label className='fw-bold'>Student Name<span className= 'text-danger'>*</span></label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       placeholder='Enter Student Name'
                       value={studentName}
                       required
                       onChange={(e) => setStudentName(e.target.value)}
                     /><br /><br />
-                    <label className='fw-bold'>Email</label><br />
+                    <label className='fw-bold'>Email<span className= 'text-danger'>*</span></label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       type='email'
                       placeholder='Enter Email'
                       value={email}
                       required
                       onChange={(e) => setEmail(e.target.value)}
                     /><br /><br />
-                    <label className='fw-bold'>Password</label><br />
+                    
+                    <label className='fw-bold'>Contact Number<span className= 'text-danger'>*</span></label><br />
                     <input
-                      className='custom-input mt-3 cursor'
-                      type='password'
-                      placeholder='Enter Password'
-                      value={password}
-                      required
-                      onChange={(e) => setPassword(e.target.value)}
-                    /><br /><br />
-                    <label className='fw-bold'>Contact Number</label><br />
-                    <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       placeholder='Enter Contact Number'
                       value={contactNumber}
                       required
                       onChange={(e) => setContactNumber(e.target.value)}
                     /><br /><br />
-                    <label className='fw-bold'>School</label><br />
+                    <label className='fw-bold'>School<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={school}
                       required
                       onChange={(e) => setSchool(e.target.value)}
                     >
-                      <option value="">Select School</option>
+                      <option value="">--Select School--</option>
                       {schools.map((school) => (
                         <option key={school.school_id} value={school.school_id}>{school.school_name}</option>
                       ))}
                     </select><br /><br />
-                    <label className='fw-bold'>Class</label><br />
+                    <label className='fw-bold'>Class<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={className}
                       onChange={(e) => setClassName(e.target.value)}
                     >
-                      <option value="">Select Class</option>
+                      <option value="">--Select Class--</option>
                       {classes.map((classItem) => (
                         <option key={classItem.class_id} value={classItem.class_name}>{classItem.class_name}</option>
                       ))}
                     </select><br /><br />
-                    <label className='fw-bold'>Country</label><br />
+                    <label className='fw-bold'>Country<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={country}
                       required
                       onChange={(e) => setCountry(e.target.value)}
                     >
-                      <option value="">Select Country</option>
+                      <option value="">--Select Country--</option>
                       {countries.map((country) => (
                         <option key={country.iso2} value={country.iso2}>{country.name}</option>
                       ))}
                     </select><br /><br />
-                    <label className='fw-bold'>State</label><br />
+                    <label className='fw-bold'>State<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={state}
                       onChange={(e) => setState(e.target.value)}
                     >
-                      <option value="">Select State</option>
+                      <option value="">--Select State--</option>
                       {states.map((state) => (
                         <option key={state.iso2} value={state.iso2}>{state.name}</option>
                       ))}
                     </select><br /><br />
-                    <label className='fw-bold'>City</label><br />
+                    <label className='fw-bold'>City<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
                     >
-                      <option value="">Select City</option>
+                      <option value="">--Select City--</option>
                       {cities.map((city) => (
                         <option key={city.name} value={city.name}>{city.name}</option>
                       ))}
                     </select><br /><br />
                     <label className='fw-bold'>Zipcode</label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       placeholder='Enter Zipcode'
                       value={zipcode}
                       onChange={(e) => setZipcode(e.target.value)}
                     /><br /><br />
-                    <label className='fw-bold'>Profile Picture</label><br />
+                    <label className='fw-bold'>Profile Picture<span className= 'text-success mx-2' style = {{fontSize: "13px"}}>[ jpg, jpeg, png (max size: 2 MB) ]</span></label><br />
                     <input
-                      className='mt-3 cursor'
+                      className='form-control mt-1 cursor'
                       type="file"
                       onChange={(e) => setProfilePic(e.target.files[0])}
-                    /><br /><br />
+                    /><br></br>
+                    <hr></hr>
+
+                    <label className='fw-bold'>Password<span className= 'text-danger'>*</span></label><br />
+                    <input
+                      className='custom-input mt-1 cursor'
+                      type='password'
+                      placeholder='Enter Password'
+                      value={password}
+                      required
+                      onChange={(e) => setPassword(e.target.value)}
+                    /><br /><br /><br></br>
+                    <div className= 'd-flex justify-content-end'>
                     <button type="submit" className="btn btn-primary">Add Student</button>
                     <Link to="/students" className="btn btn-secondary ms-2">Cancel</Link>
+                    </div>
                   </form>
                 </div>
               </div>

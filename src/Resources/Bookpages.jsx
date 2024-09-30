@@ -66,7 +66,7 @@ const Bookpages = () => {
           <div className="col-md-12">
             <div className="container mt-3 bg-white shadow-lg p-3 mb-5 bg-white rounded">
               <div className="d-flex justify-content-between">
-                  <div className='text-grey h5'>Book Pages</div>
+                  <div className='text-grey h5'>Manage Book Pages</div>
                   <div>
                   <input
                       type="text"
@@ -76,17 +76,19 @@ const Bookpages = () => {
                       onChange={handleSearchChange}
                     />
                   </div>
-                    
                   </div>
+                  <hr></hr>
+                  <p className= 'text-success text-italic'>*List of all the added books are fetched in the list. Select a book to add the pages</p>
+
               <div className="row mt-3">
                 <div className="col-md-12">
-                  <table className="table table-bordered table-striped table-hover">
-                    <thead>
-                      <tr>
-                        <th scope="col">SNo</th>
-                        <th scope="col">Book</th>
+                  <table className="table  table-bordered table-responsive">
+                  <thead className='table-light'>
+                  <tr>
+                        <th scope="col">S.no.</th>
+                        <th scope="col">Book Name </th>
                         <th scope="col">Class</th>
-                        <th scope="col">Subject</th>
+                        <th scope="col">Subject Name</th>
                         <th scope="col">Actions</th>
                       </tr>
                     </thead>

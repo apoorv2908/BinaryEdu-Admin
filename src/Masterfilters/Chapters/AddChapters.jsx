@@ -22,7 +22,7 @@ const AddChapters = () => {
   const [chapterImage, setChapterImage] = useState(null); // New state for chapter image
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useEffect(() => { 
     fetchClasses();
   }, []);
 
@@ -190,12 +190,12 @@ const AddChapters = () => {
               {/* Topbar */}
               <div className="row">
                 <div className="col-md-12 bg-white shadow-lg p-3 mb-5 bg-white rounded">
-                  <div className='text-grey h6'>Add Chapter</div>
+                  <div className='text-grey h6 fw-bold'>Add Chapter</div>
                   <hr></hr>
                   <form onSubmit={handleSubmit}>
                     <label className= 'fw-bold'>Class<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       required = "true"
                       value={selectedClass}
                       onChange={(e) => {
@@ -203,7 +203,7 @@ const AddChapters = () => {
                         fetchSubjects(e.target.value);
                       }}
                     >
-                      <option value="">Select Class</option>
+                      <option value="">--Select Class---</option>
                       {classes.map((cls) => (
                         <option key={cls.class_id} value={cls.class_id}>{cls.class_name}</option>
                       ))}
@@ -211,7 +211,7 @@ const AddChapters = () => {
 
                     <label className= 'fw-bold'>Subject<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={selectedSubject}
                       required = "true"
                       onChange={(e) => {
@@ -219,7 +219,7 @@ const AddChapters = () => {
                         fetchSeries(selectedClass, e.target.value);
                       }}
                     >
-                      <option value="">Select Subject</option>
+                      <option value="">--Select Subject--</option>
                       {subjects.map((sub) => (
                         <option key={sub.subject_id} value={sub.subject_id}>{sub.subject_name}</option>
                       ))}
@@ -227,7 +227,7 @@ const AddChapters = () => {
 
                     <label className= 'fw-bold'>Series<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       required = "true"
                       value={selectedSeries}
                       onChange={(e) => {
@@ -235,7 +235,7 @@ const AddChapters = () => {
                         fetchBooks(selectedClass, selectedSubject, e.target.value);
                       }}
                     >
-                      <option value="">Select Series</option>
+                      <option value="">--Select Series--</option>
                       {series.map((ser) => (
                         <option key={ser.series_id} value={ser.series_id}>{ser.series_name}</option>
                       ))}
@@ -243,7 +243,7 @@ const AddChapters = () => {
 
                     <label className= 'fw-bold'>Book<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3'
+                      className='custom-input mt-1'
                       value={selectedBook}
                       required = "true"
                       onChange={(e) => {
@@ -251,34 +251,34 @@ const AddChapters = () => {
                         fetchSections(selectedClass, selectedSubject, selectedSeries, e.target.value);
                       }}
                     >
-                      <option value="">Select Book</option>
+                      <option value="">--Select Book--</option>
                       {books.map((book) => (
                         <option key={book.book_id} value={book.book_id}>{book.book_name}</option>
                       ))}
                     </select><br /><br />
 
-                    <label className= 'fw-bold'>Section <span className= 'text-danger'>(optional)</span></label><br />
+                    <label className= 'fw-bold'>Section </label><br />
                     <select
-                      className='custom-input mt-3'
+                      className='custom-input mt-1'
                       value={selectedSection}
                       onChange={(e) => {
                         setSelectedSection(e.target.value);
                         fetchUnits(selectedClass, selectedSubject, selectedSeries, selectedBook, e.target.value);
                       }}
                     >
-                      <option value="">Select Section</option>
+                      <option value="">--Select Section--</option>
                       {sections.map((section) => (
                         <option key={section.section_id} value={section.section_id}>{section.section_name}</option>
                       ))}
                     </select><br /><br />
 
-                    <label className= 'fw-bold'>Unit <span className= 'text-danger'>(optional)</span></label><br />
+                    <label className= 'fw-bold'>Unit</label><br />
                     <select
-                      className='custom-input mt-3'
+                      className='custom-input mt-1'
                       value={selectedUnit}
                       onChange={(e) => setSelectedUnit(e.target.value)}
                     >
-                      <option value="">Select Unit</option>
+                      <option value="">--Select Unit--</option>
                       {units.map((unit) => (
                         <option key={unit.unit_id} value={unit.unit_id}>{unit.unit_title}</option>
                       ))}
@@ -286,28 +286,28 @@ const AddChapters = () => {
 
                     <label className= 'fw-bold'>Chapter Name<span className= 'text-danger'>*</span></label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       placeholder='Enter Chapter Name'
                       value={chapterName}
                       onChange={(e) => setChapterName(e.target.value)}
                       required = "true"
                     /><br /><br />
 
+  
+              <label className='fw-bold'>Chapter Media<span className= 'text-success mx-2' style = {{fontSize: "13px"}}>[ jpg, jpeg, png, pdf (max size: 10MB) ] </span></label><br />
+                    <input
+                      className='form-control mt-1 cursor'
+                      type='file'
+                      accept='image/jpeg,image/png,image/gif,application/pdf' // Updated accept attribute to accept images and PDFs
+                      onChange={(e) => setChapterImage(e.target.files[0])}
+                    /><br></br>
                     <label className= 'fw-bold'>Chapter Description</label><br />
                     <textarea
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       placeholder='Enter Chapter Description'
                       value={chapterDescription}
                       onChange={(e) => setChapterDescription(e.target.value)}
                     ></textarea><br /><br></br>
-              <label className='fw-bold'>Chapter Media<span className= 'text-danger mx-2' style = {{fontSize: "13px"}}>(jpg/jpeg/png/gif/pdf) </span></label><br />
-                    <input
-                      className='mt-3 cursor'
-                      type='file'
-                      accept='image/jpeg,image/png,image/gif,application/pdf' // Updated accept attribute to accept images and PDFs
-                      onChange={(e) => setChapterImage(e.target.files[0])}
-                    /><br /><br />
-                    <br></br>
                     <div className="d-flex justify-content-end">
                       <button type="submit" className="btn btn-primary mt-3 mx-3">Add Chapter</button>
                       <Link to = "/chapters"><button className="btn btn-danger mt-3">Cancel</button></Link>

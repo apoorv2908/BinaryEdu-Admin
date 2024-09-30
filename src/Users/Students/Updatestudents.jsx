@@ -174,23 +174,20 @@ const Updatestudents = () => {
               <div className="row">
                 <div className="col-md-12 bg-white shadow-lg p-3 mb-5 bg-white rounded">
                   <div className='text-grey h6'>
-                    <span>
-                      <Link style={{ color: 'black', textDecoration: 'none' }} to="/students">🡨</Link>
-                    </span> 
                     Update Student
                   </div>
                   <hr />
                   <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <label className='fw-bold'>Student Name</label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       placeholder='Enter Student Name'
                       value={studentName}
                       onChange={(e) => setStudentName(e.target.value)}
                     /><br /><br />
                     <label className='fw-bold'>Email</label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       type='email'
                       placeholder='Enter Email'
                       value={email}
@@ -198,7 +195,7 @@ const Updatestudents = () => {
                     /><br /><br />
                     <label className='fw-bold'>Password*</label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       type='password'
                       placeholder='Enter Password'
                       value={password}
@@ -206,14 +203,14 @@ const Updatestudents = () => {
                     /><br /><br />
                     <label className='fw-bold'>Contact Number*</label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       placeholder='Enter Contact Number'
                       value={contactNumber}
                       onChange={(e) => setContactNumber(e.target.value)}
                     /><br /><br />
                     <label className='fw-bold'>School</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={school}
                       onChange={(e) => setSchool(e.target.value)}
                     >
@@ -224,7 +221,7 @@ const Updatestudents = () => {
                     </select><br /><br />
                     <label className='fw-bold'>Country</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={country}
                       onChange={(e) => setCountry(e.target.value)}
                     >
@@ -235,7 +232,7 @@ const Updatestudents = () => {
                     </select><br /><br />
                     <label className='fw-bold'>State</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={state}
                       onChange={(e) => setState(e.target.value)}
                     >
@@ -246,7 +243,7 @@ const Updatestudents = () => {
                     </select><br /><br />
                     <label className='fw-bold'>City</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
                     >
@@ -257,32 +254,32 @@ const Updatestudents = () => {
                     </select><br /><br />
                     <label className='fw-bold'>Zipcode</label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       placeholder='Enter Zipcode'
                       value={zipcode}
                       onChange={(e) => setZipcode(e.target.value)}
                     /><br /><br />
                     <label className='fw-bold'>Profile Picture</label><br />
                     {currentProfilePic && (
-                      <div className='profile-pic-container mt-3'>
+                      <div className='profile-pic-container '>
                         <img
                           src={`${config.apiBaseUrl}/fullmarks-server/uploads/students/${currentProfilePic}`}
                           alt="Profile"
                           className='current-profile-pic img-fluid'
                             style={{ maxHeight: '150px' }} 
-                        />
+                        /><br></br>
                         <button
                           type='button'
-                          className='cancel-btn'
+                          className='cancel-btn mt-2 '
                           onClick={() => setCurrentProfilePic('')}
                         >
-                          ✕
+                         Add New Profile Pic
                         </button>
                       </div>
                     )}
                     {!currentProfilePic && (
                       <input
-                        className='mt-3 cursor'
+                        className=' cursor form-control'
                         type='file'
                         onChange={(e) => setProfilePic(e.target.files[0])}
                       />

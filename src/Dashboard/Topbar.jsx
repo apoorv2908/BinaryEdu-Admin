@@ -17,13 +17,13 @@ const Topbar = () => {
   };
 
   return (
-    <Navbar bg="primary" expand="lg" className='text-dark p-3 bg-white'>
+    <Navbar expand="lg" className='text-dark px-2 bg-white'>
       <Navbar.Brand><img className='mno' src={logo} alt="Logo"  /></Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto mx-2">
+        <Nav className="mr-auto">
           <Nav.Link className='mx-5 fw-bold' as={Link} to="/homepage">DASHBOARD</Nav.Link>
-          <NavDropdown title="MASTERFILTERS" className='mx-5 fw-bold' id="basic-nav-dropdown">
+          <NavDropdown title="MASTERFILTERS" className='mx-3 fw-bold' id="basic-nav-dropdown">
             <NavDropdown.Item as={Link} to="/classes" style={{ color: 'black', textDecoration: 'none' }}>Classes</NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/subjects" style={{ color: 'black', textDecoration: 'none' }}>Subjects</NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/series" style={{ color: 'black', textDecoration: 'none' }}>Series</NavDropdown.Item>
@@ -32,30 +32,27 @@ const Topbar = () => {
             <NavDropdown.Item as={Link} to="/units" style={{ color: 'black', textDecoration: 'none' }}>Units</NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/chapters" style={{ color: 'black', textDecoration: 'none' }}>Chapters</NavDropdown.Item>
           </NavDropdown>
-          <NavDropdown title="RESOURCES" className='mx-5 fw-bold' id="basic-nav-dropdown">
+          <NavDropdown title="RESOURCES" className='mx-3 fw-bold' id="basic-nav-dropdown">
             <NavDropdown.Item as={Link} to="/library" style={{ color: 'black', textDecoration: 'none' }}>Library</NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/bookpages" style={{ color: 'black', textDecoration: 'none' }}>Book Pages</NavDropdown.Item>
           </NavDropdown>
-          <NavDropdown title="USERS" className='mx-5 fw-bold' id="basic-nav-dropdown">
+          <NavDropdown title="USERS" className='mx-3 fw-bold' id="basic-nav-dropdown">
             <NavDropdown.Item as={Link} to="/schools" style={{ color: 'black', textDecoration: 'none' }}>School</NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/students" style={{ color: 'black', textDecoration: 'none' }}>Student</NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/teachers" style={{ color: 'black', textDecoration: 'none' }}>Teachers</NavDropdown.Item>
           </NavDropdown>
+          <NavDropdown title="CMS" className='mx-3 fw-bold' id="basic-nav-dropdown">
+            <NavDropdown.Item as={Link} to="/updateaboutus" style={{ color: 'black', textDecoration: 'none' }}>About us</NavDropdown.Item>
+          </NavDropdown>
         </Nav>
-        {isAuthenticated && (
-          <Nav className=" mx-4">
-            <NavDropdown title={`Hi, ${username}!`} style={{ backgroundColor: "yellow", borderRadius: "5px", color: 'white' }} className='fw-bold shift-user-prof' id="user-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/change-password" style={{ color: 'black', textDecoration: 'none' }}>Change Password</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/report" style={{ color: 'black', textDecoration: 'none' }}>Report</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/report" style={{ color: 'black', textDecoration: 'none' }}>Post Notification</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/report" style={{ color: 'black', textDecoration: 'none' }}>Tickets</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/report" style={{ color: 'black', textDecoration: 'none' }}>Manage Newsletters</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/report" style={{ color: 'black', textDecoration: 'none' }}>Queries</NavDropdown.Item>
-              <NavDropdown.Item onClick={handleLogout} style={{ color: 'black', textDecoration: 'none' }}>Logout</NavDropdown.Item>
-            </NavDropdown>
+       
+      </Navbar.Collapse>
+      {isAuthenticated && (
+          <Nav>
+              <button className='btn btn-danger text-white' onClick={handleLogout} style={{ color: 'black', textDecoration: 'none' }}>Logout</button>
           </Nav>
         )}
-      </Navbar.Collapse>
+
     </Navbar>
   );
 }

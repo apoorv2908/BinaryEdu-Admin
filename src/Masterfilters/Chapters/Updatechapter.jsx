@@ -202,7 +202,7 @@ const Updatechapter = () => {
                   <form onSubmit={handleSubmit}>
                     <label className= 'fw-bold'>Series</label><br />
                     <select
-                      className='custom-input mt-3'
+                      className='custom-input'
                       value={selectedSeries}
                       onChange={(e) => setSelectedSeries(e.target.value)}
                     >
@@ -214,7 +214,7 @@ const Updatechapter = () => {
 
                     <label className= 'fw-bold'>Class</label><br />
                     <select
-                      className='custom-input mt-3'
+                      className='custom-input '
                       value={selectedClass}
                       onChange={(e) => setSelectedClass(e.target.value)}
                     >
@@ -226,7 +226,7 @@ const Updatechapter = () => {
 
                     <label className= 'fw-bold'>Subject</label><br />
                     <select
-                      className='custom-input mt-3'
+                      className='custom-input '
                       value={selectedSubject}
                       onChange={(e) => setSelectedSubject(e.target.value)}
                     >
@@ -238,7 +238,7 @@ const Updatechapter = () => {
 
                     <label className= 'fw-bold'>Book</label><br />
                     <select
-                      className='custom-input mt-3'
+                      className='custom-input '
                       value={selectedBook}
                       onChange={(e) => setSelectedBook(e.target.value)}
                     >
@@ -248,9 +248,9 @@ const Updatechapter = () => {
                       ))}
                     </select><br /><br />
 
-                    <label className= 'fw-bold'>Section <span className= 'text-danger'>(optional)</span></label><br />
+                    <label className= 'fw-bold'>Section </label><br />
                     <select
-                      className='custom-input mt-3'
+                      className='custom-input '
                       value={selectedSection}
                       onChange={(e) => setSelectedSection(e.target.value)}
                     >
@@ -260,9 +260,9 @@ const Updatechapter = () => {
                       ))}
                     </select><br /><br />
 
-                    <label className= 'fw-bold'>Unit <span className= 'text-danger'>(optional)</span></label><br />
+                    <label className= 'fw-bold'>Unit </label><br />
                     <select
-                      className='custom-input mt-3'
+                      className='custom-input '
                       value={selectedUnit}
                       onChange={(e) => setSelectedUnit(e.target.value)}
                     >
@@ -274,7 +274,7 @@ const Updatechapter = () => {
 
                     <label className= 'fw-bold'>Chapter Name</label><br />
                     <input
-                      className='custom-input mt-3'
+                      className='custom-input '
                       placeholder='Enter Chapter Name'
                       value={chapterName}
                       onChange={(e) => setChapterName(e.target.value)}
@@ -282,13 +282,13 @@ const Updatechapter = () => {
 
                     <label className= 'fw-bold'>Chapter Description</label><br />
                     <textarea
-                      className='custom-input mt-3'
+                      className='custom-input '
                       placeholder='Enter Chapter Description'
                       value={chapterDescription}
                       onChange={(e) => setChapterDescription(e.target.value)}
                     ></textarea><br /><br></br>
 
-<label className='fw-bold'>Chapter Image <span className='h6 text-grey'>(max size: 2 MB, jpg/jpeg/png/gif)</span></label><br /><br></br>
+<label className='fw-bold'>Chapter Image <span className='comb text-danger'>(max size: 2 MB, jpg/jpeg/png/gif)</span></label><br /><br></br>
 {existingPic && (
   <div style={{ position: 'relative', display: 'inline-block' }}>
     <embed src={`${config.apiBaseUrl}/fullmarks-server/uploads/chapter_content/${existingPic}`} alt="Page Image" style={{ width: '100px' }} />
@@ -314,14 +314,13 @@ const Updatechapter = () => {
   <>
     <span className='text-grey h6'>Insert New Media? </span><br></br>
     <input
-      className='mt-3 cursor'
+      className='cursor form-control'
       type='file'
       onChange={(e) => setChapterImage(e.target.files[0])}
     /><br /><br></br>
   </>
 )}
 
-<br /><br></br><br></br>
                     <div className="d-flex justify-content-end">
                       <button type="submit" className="btn btn-primary mt-3 mx-3">Update Chapter</button>
                       <Link to = "/chapters"><button className="btn btn-danger mt-3">Cancel</button></Link>

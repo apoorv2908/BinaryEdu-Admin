@@ -148,16 +148,16 @@ const Updatebooks = () => {
           <Topbar />
           {/* Main content */}
           <div className="col-md-12">
-            <div className="container mt-3">
+            <div className="container ">
               {/* Topbar */}
               <div className="row">
-                <div className="col-md-12 bg-white shadow-lg p-3 mb-5 bg-white rounded">
+                <div className="col-md-12 mt-3 bg-white shadow-lg p-3 mb-5 bg-white rounded">
                   <div className='text-grey fw-bold'>Update Book</div>
                   <hr />
                   <form onSubmit={handleSubmit}>
                     <label className='fw-bold'>Series</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={selectedSeries}
                       onChange={(e) => setSelectedSeries(e.target.value)}
                     >
@@ -169,7 +169,7 @@ const Updatebooks = () => {
 
                     <label className='fw-bold'>Class</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={selectedClass}
                       onChange={(e) => setSelectedClass(e.target.value)}
                     >
@@ -181,7 +181,7 @@ const Updatebooks = () => {
 
                     <label className='fw-bold'>Subject</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={selectedSubject}
                       onChange={(e) => setSelectedSubject(e.target.value)}
                     >
@@ -193,7 +193,7 @@ const Updatebooks = () => {
 
                     <label className='fw-bold'>Book Name</label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       placeholder='Enter Book Name'
                       value={bookName}
                       onChange={(e) => setBookName(e.target.value)}
@@ -201,7 +201,7 @@ const Updatebooks = () => {
 
                     <label className='fw-bold'>Book Code</label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       placeholder='Enter Book Code'
                       value={bookCode}
                       onChange={(e) => setBookCode(e.target.value)}
@@ -209,36 +209,36 @@ const Updatebooks = () => {
 
                     <label className='fw-bold'>Book Download Link</label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       placeholder='Enter Book Download Link'
                       value={bookDownloadLink}
                       onChange={(e) => setBookDownloadLink(e.target.value)}
                     /><br /><br />
 
-                    <label className='fw-bold'>Android Download Link</label><br />
+                    <label className='fw-bold'>TPG Download Link</label><br />
                     <input
-                      className='custom-input mt-3 cursor'
-                      placeholder='Enter Android Download Link'
+                      className='custom-input  cursor'
+                      placeholder='Enter TPG Download Link'
                       value={androidDownloadLink}
                       onChange={(e) => setAndroidDownloadLink(e.target.value)}
                     /><br /><br />
 
                     <label className='fw-bold'>Book Description</label><br />
                     <textarea
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       placeholder='Enter Book Description'
                       value={bookDescription}
                       onChange={(e) => setBookDescription(e.target.value)}
                     ></textarea><br /><br />
-                    <label className='fw-bold'>Book Cover <span className='h6 text-grey'>(max size: 2 MB, jpg/jpeg/png/gif)</span></label><br /><br></br>
+                    <label className='fw-bold'>Book Cover <span className='comb text-danger'>(max size: 2 MB, jpg/jpeg/png/gif)</span></label><br /><br></br>
                     {existingBookCover && (
                       <div>
                         <img src={`${config.apiBaseUrl}/fullmarks-server/uploads/book_cover/${existingBookCover}`} alt="Page Image" style={{ width: '50px' }} />
                       </div>
                     )}
-                    <span className= 'text-grey h6'>Insert New Book Cover? </span>
+                    <span className= 'text-grey h6'>Add New Book Cover? </span>
                     <input
-                      className='mt-3 cursor'
+                      className=' cursor form-control'
                       type='file'
                       onChange={(e) => setBookCover(e.target.files[0])}
                     /><br /><br></br>

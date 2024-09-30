@@ -138,16 +138,16 @@ const Updatesections = () => {
           <Topbar />
           {/* Main content */}
           <div className="col-md-12">
-            <div className="container mt-3">
+            <div className="container ">
               {/* Topbar */}
               <div className="row">
-                <div className="col-md-12 bg-white shadow-lg p-3 mb-5 bg-white rounded">
+                <div className="col-md-12 mt-3 bg-white shadow-lg p-3 mb-5 bg-white rounded">
                 <div className='text-grey h6'>Update Section</div>
                 <hr></hr>
                   <form onSubmit={handleSubmit}>
                     <label className= 'fw-bold'>Class</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={selectedClass}
                       required
                       onChange={(e) => {
@@ -162,7 +162,7 @@ const Updatesections = () => {
                     </select><br /><br></br>
                     <label className= 'fw-bold'>Subject</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={selectedSubject}
                       required
                       onChange={(e) => {
@@ -177,7 +177,7 @@ const Updatesections = () => {
                     </select><br /><br></br>
                     <label className= 'fw-bold'>Series</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={selectedSeries}
                       required
                       onChange={(e) => {
@@ -192,7 +192,7 @@ const Updatesections = () => {
                     </select><br /><br></br>
                     <label className= 'fw-bold'>Book</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={selectedBook}
                       required
                       onChange={(e) => setSelectedBook(e.target.value)}
@@ -204,7 +204,7 @@ const Updatesections = () => {
                     </select><br /><br></br>
                     <label className= 'fw-bold'>Section Name</label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       placeholder='Enter Section Name'
                       required
                       value={sectionName}

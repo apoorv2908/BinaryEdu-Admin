@@ -1,10 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 body{
-  font-family: "Noto Sans" !important;
+  font-family: "Outfit" !important;
 }
 
+.ql-editor {
+  font-family: 'Outfit';
+}
 
+.ql-size {
+  font-family: 'Outfit';
+}
 
 body{
   background-color: lightgray !important; 
@@ -23,7 +29,9 @@ li{
   cursor: pointer;
 }
 
-
+.klesi{
+overflow-x: hidden;
+}
 .input-group{
   width: 20% !important;
 }
@@ -39,4 +47,8 @@ li{
 
 .image-container .btn {
   margin-left: 10px;
+}
+
+.comb{
+  font-size: small;
 }

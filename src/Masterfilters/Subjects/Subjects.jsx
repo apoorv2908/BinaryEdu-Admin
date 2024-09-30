@@ -109,8 +109,8 @@ class Subjects extends Component {
                 {/* Topbar */}
                 <div className="row">
                   <div className="col-md-12 d-flex justify-content-between">
-                  <div className='text-dark fw-bold h5'>Subjects</div>
-                    <Link to={'/addsubjects'}><button className="btn btn-primary">+ Add Subjects</button></Link>
+                  <div className='text-dark h5'>Manage Subjects</div>
+                    <Link to={'/addsubjects'}><button className="btn btn-primary">+ Add Subject</button></Link>
                   </div>
                 </div>
                 <hr />
@@ -131,7 +131,7 @@ class Subjects extends Component {
                 {/* Table */}
                 <div className="row mt-3">
                   <div className="col-md-12 table responsive">
-                    <table className="table table-bordered table table-sm table-striped table-hover">
+                    <table className="table table table-sm table-bordered">
                       <thead className= 'table-light'>
                         <tr>
                           <th scope="col">S.no.</th>

@@ -88,8 +88,8 @@ const Library = () => {
             <div className="container mt-3 bg-white shadow-lg p-3 mb-5 bg-white rounded">
               <div className="row">
                 <div className="col-md-12 d-flex justify-content-between">
-                  <div className='text-grey h5'>Library</div>
-                  <Link to={'/addlibrary'}><button className="btn btn-primary">+ Add Library</button></Link>
+                  <div className='text-grey h5'>Manage Resources</div>
+                  <Link to={'/addlibrary'}><button className="btn btn-primary">+ Add Resource</button></Link>
                 </div>
               </div>
               <hr />
@@ -108,12 +108,14 @@ const Library = () => {
               </div>
               <div className="row mt-3">
                 <div className="col-md-12 table-responsive">
-                  <table className="table table-sm table-bordered table-striped table-hover table-rounded">
+                  <table className="table table-sm  table-rounded table-bordered">
                     <thead className='table-light'>
                       <tr>
-                        <th scope="col">SNo</th>
+                        <th scope="col">S.no.</th>
                         <th scope="col">Resource Title</th>
                         <th scope="col">Resource Type</th>
+                        <th scope="col">Added For</th>
+                        <th scope="col">Resource Tagged</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -123,6 +125,13 @@ const Library = () => {
                           <td>{getSNo(index)}</td>
                           <td>{item.resource_title}</td>
                           <td>{item.resource_type}</td>
+                          <td><b className= 'comb'>Book Name:</b> {item.book_name}<br></br>
+                          <b className= 'comb'>Chapter Name:</b> {item.chapter_name}
+
+
+                          </td>
+                          <td>Yes</td>
+
                           {/*<td>
   {item.resource_type === 'videos' ? (
     <video width="200" controls>

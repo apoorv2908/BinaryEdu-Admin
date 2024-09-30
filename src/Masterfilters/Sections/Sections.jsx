@@ -94,7 +94,7 @@ const Sections = () => {
               <div className="container mt-3 bg-white shadow-lg p-3 mb-5 bg-white rounded">
               <div className="row">
                 <div className="col-md-12 d-flex justify-content-between">
-                <div className='text-grey h5'>Sections</div>
+                <div className='text-grey h5'>Manage Sections</div>
                   <Link to={'/addsections'}><button className="btn btn-primary">+ Add Section</button></Link>
                 </div>
               </div>
@@ -113,15 +113,15 @@ const Sections = () => {
               {/* Table */}
               <div className="row mt-3">
                 <div className="col-md-12 table-responsive">
-                  <table className="table table table-sm table-bordered table-striped table-hover ">
+                  <table className="table table table-sm table-bordered table-hover ">
                     <thead className= 'table-light'>
                       <tr>
-                        <th scope="col">SNo</th>
-                        <th scope="col">Section</th>
-                        <th scope="col">Class</th>
-                        <th scope="col">Subject</th>
-                        <th scope="col">Series</th>
-                        <th scope="col">Book</th>
+                        <th scope="col">S.no.</th>
+                        <th scope="col">Section Name </th>
+                        <th scope="col">Class Name</th>
+                        <th scope="col">Subject Name</th>
+                        <th scope="col">Series Name</th>
+                        <th scope="col">Book Name </th>
                         <th scope="col">Actions</th>
                       </tr>
                     </thead>

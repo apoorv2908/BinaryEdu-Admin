@@ -125,12 +125,12 @@ const Addsections = () => {
               {/* Topbar */}
               <div className="row">
                 <div className="col-md-12 bg-white shadow-lg p-3 mb-5 bg-white rounded">
-                  <div className='text-grey h6'>Add Section</div>
+                  <div className='text-grey h6 fw-bold'>Add Section</div>
                   <hr />
                   <form onSubmit={handleSubmit}>
-                    <label className='fw-bold'>Class</label><br />
+                    <label className='fw-bold'>Class<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={selectedClass}
                       onChange={(e) => {
                         setSelectedClass(e.target.value);
@@ -138,15 +138,15 @@ const Addsections = () => {
                       }}
                       required
                     >
-                      <option value="">Select Class</option>
+                      <option value="">--Select Class--</option>
                       {classes.map((cls) => (
                         <option key={cls.class_id} value={cls.class_id}>{cls.class_name}</option>
                       ))}
                     </select><br /><br />
 
-                    <label className='fw-bold'>Subject</label><br />
+                    <label className='fw-bold'>Subject<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={selectedSubject}
                       onChange={(e) => {
                         setSelectedSubject(e.target.value);
@@ -154,15 +154,15 @@ const Addsections = () => {
                       }}
                       required
                     >
-                      <option value="">Select Subject</option>
+                      <option value="">--Select Subject--</option>
                       {subjects.map((sub) => (
                         <option key={sub.subject_id} value={sub.subject_id}>{sub.subject_name}</option>
                       ))}
                     </select><br /><br />
 
-                    <label className='fw-bold'>Series</label><br />
+                    <label className='fw-bold'>Series<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={selectedSeries}
                       onChange={(e) => {
                         setSelectedSeries(e.target.value);
@@ -170,28 +170,28 @@ const Addsections = () => {
                       }}
                       required
                     >
-                      <option value="">Select Series</option>
+                      <option value="">--Select Series--</option>
                       {series.map((ser) => (
                         <option key={ser.series_id} value={ser.series_id}>{ser.series_name}</option>
                       ))}
                     </select><br /><br />
 
-                    <label className='fw-bold'>Book</label><br />
+                    <label className='fw-bold'>Book<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={selectedBook}
                       onChange={(e) => setSelectedBook(e.target.value)}
                       required
                     >
-                      <option value="">Select Book</option>
+                      <option value="">--Select Book--</option>
                       {books.map((book) => (
                         <option key={book.book_id} value={book.book_id}>{book.book_name}</option>
                       ))}
                     </select><br /><br />
 
-                    <label className='fw-bold'>Section Name</label><br />
+                    <label className='fw-bold'>Section Name<span className= 'text-danger'>*</span></label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       placeholder='Enter Section Name'
                       value={sectionName}
                       onChange={(e) => setSectionName(e.target.value)}

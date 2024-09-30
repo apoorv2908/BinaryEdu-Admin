@@ -92,7 +92,7 @@ const Chapters = () => {
               {/* Topbar */}
               <div className="row">
                 <div className="col-md-12 d-flex justify-content-between">
-                <div className='text-grey h5'>Chapters</div>
+                <div className='text-grey h5'>Manage Chapters</div>
                   <Link to={'/addchapters'}><button className="btn btn-primary">+ Add Chapter</button></Link>
                 </div>
               </div>
@@ -111,13 +111,13 @@ const Chapters = () => {
               {/* Table */}
               <div className="row mt-3">
                 <div className="col-md-12 table-responsive">
-                  <table className="table table-sm table-bordered table-striped table-hover table-rounded">
+                  <table className="table table-sm  table-bordered table-rounded">
                     <thead className= 'table-light'>
                       <tr>
-                        <th scope="col">SNo</th>
+                        <th scope="col">S.no.</th>
                         <th scope="col">Chapter Name</th>
-                        <th scope="col">Book</th>
-                        <th scope="col">Class/Subject/Series</th>
+                        <th scope="col">Book Name</th>
+                        <th scope="col">Class Name/ Subject Name/ Series Name</th>
                         <th scope="col">Actions</th>
                       </tr>
                     </thead>
@@ -127,7 +127,7 @@ const Chapters = () => {
                           <td>{index+1}</td>
                           <td>{item.chapter_title}</td>
                           <td>{item.book_name}</td>
-                          <td>{item.class_name} / {item.subject_name} / {item.series_name}</td>
+                          <td className= 'comb'>{item.class_name} / {item.subject_name} / {item.series_name}</td>
                           <td>
                             <Link to={`/updatechapter/${encodeId(item.chapter_id)}`}>
                               <button className="btn btn-sm btn-info mr-2 mx-3">

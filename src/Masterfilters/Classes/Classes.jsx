@@ -92,8 +92,8 @@ const Classes = () => {
             <div className="container mt-3 bg-light shadow-lg p-3 mb-5 bg-white rounded">
             <div className="row ">
                 <div className="col-md-12 d-flex justify-content-between">
-                  <div className='text-dark my-1 fw-bold h4'>Classes</div>
-                  <Link to={'/addclasses'}><button className="btn btn-primary"> + Add New Class</button></Link>
+                  <div className='text-dark h5'>Manage Classes</div>
+                  <Link to={'/addclasses'}><button className="btn btn-primary"> + Add Class</button></Link>
                 </div>
               </div>
             <hr></hr>
@@ -115,11 +115,11 @@ const Classes = () => {
               {/* Table */}
               <div className="row mt-3">
                 <div className="col-md-12 table-responsive">
-                  <table className="table table-sm table-bordered  table-striped table-hover table-rounded ">
+                  <table className="table table-sm table-bordered table-rounded ">
                     <thead className= 'table-light'>
                       <tr>
                         <th scope="col">S.no.</th>
-                        <th scope="col">Classes</th>
+                        <th scope="col">Class Name </th>
                         <th scope="col">Actions</th>
                       </tr>
                     </thead>

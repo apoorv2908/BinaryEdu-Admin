@@ -117,7 +117,7 @@ const Students = () => {
               {/* Topbar */}
               <div className='row'>
                 <div className="col-md-12 d-flex justify-content-between">
-                  <div className='text-grey h5'>Students</div>
+                  <div className='text-grey h5'>Manage Students</div>
                   <Link to={'/addstudents'}><button className="btn btn-primary">+ Add Student</button></Link>
                 </div>
               </div>
@@ -136,17 +136,17 @@ const Students = () => {
               {/* Table */}
               <div className="row mt-3">
                 <div className="col-md-12 table-responsive">
-                  <table className="table table-sm table-bordered table-striped table-hover">
+                  <table className="table table-sm table-bordered">
                     <thead className='table-secondary'>
                       <tr>
-                        <th scope="col">SNo</th>
-                        <th scope="col">Student</th>
-                        <th scope="col">School</th>
-                        <th scope="col">Contact Info</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">Assigned Books</th>
-                        <th scope="col">Profile Pic</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">S.no</th>
+                        <th scope="col">Student Name</th>
+                        <th scope="col">School Name</th>
+                        <th scope="col">Student Contact Info</th>
+                        <th scope="col">Student Location Info</th>
+                        <th scope="col">Student Assigned Books</th>
+                        <th scope="col">Student Profile Pic</th>
+                        <th scope="col">Student Status</th>
                         <th scope="col">Actions</th>
                       </tr>
                     </thead>
@@ -156,13 +156,13 @@ const Students = () => {
                           <td>{getSNo(index)}</td>
                           <td>{item.student_name}</td>
                           <td>{item.school_name}</td>
-                          <td className='h6'><b>Email:</b> {item.email}<br /><b>Contact:</b> {item.contact_no}</td>
-                          <td className='h6'><b>Country:</b> {item.country}<br /><b>State:</b> {item.state}<br /><b>City:</b> {item.city}</td>
+                          <td className='comb'><b>Email:</b> {item.email}<br /><b>Contact:</b> {item.contact_no}</td>
+                          <td className='comb'><b>Country:</b> {item.country}<br /><b>State:</b> {item.state}<br /><b>City:</b> {item.city}</td>
                           <td>{item.assigned_books}</td>
                           <td>
                           {item.profile_pic && (
-  <img src={`${config.apiBaseUrl}/fullmarks-server/uploads/students/${item.profile_pic}`} alt="Profile" style={{ width: '50px' }} />
-)}
+                              <img style = {{borderRadius: "50%", width: '70px' }} src={`${config.apiBaseUrl}/fullmarks-server/uploads/students/${item.profile_pic}`} alt="No Image"  />
+                            )}
 
                           </td>
                           <td>
@@ -174,25 +174,25 @@ const Students = () => {
                             </button>
                           </td>
                           <td>
-                            <Link to={`/updatestudents/${encodeId(item.student_id)}`}>
-                              <button className="btn btn-sm btn-secondary mx-1">
-                                Edit Student
-                              </button>
-                            </Link>
-                            <br />
-                            <Link to={`/assignbookstudent/${encodeId(item.student_id)}`}>
-                              <button className="btn btn-sm btn-secondary mt-2 mx-1">
-                                Assign Book
-                              </button>
-                            </Link>
-                            <br />
-                            <button
-                              className="btn btn-sm btn-danger mx-1 mt-2"
-                              onClick={() => handleDelete(item.student_id)}
-                            >
-                              Delete Student
-                            </button>
-                          </td>
+  <Link to={`/updatestudents/${encodeId(item.student_id)}`}>
+    <button className="btn btn-sm btn-secondary">
+     Edit
+    </button>
+  </Link>
+  <br />
+  <Link to={`/assignbookstudent/${encodeId(item.student_id)}`}>
+    <button className=" comb btn btn-sm btn-secondary mt-1">
+      Assign Books
+    </button>
+  </Link>
+  <br />
+  <button
+    className="btn btn-sm btn-danger mt-1"
+    onClick={() => handleDelete(item.student_id)}
+  >
+    Delete
+  </button>
+</td>
                         </tr>
                       ))}
                     </tbody>

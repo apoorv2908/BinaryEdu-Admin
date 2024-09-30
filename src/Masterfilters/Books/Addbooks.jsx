@@ -121,60 +121,60 @@ const AddBook = () => {
             <div className="container mt-3">
               <div className="row">
                 <div className="col-md-12 bg-white shadow-lg p-3 mb-5 bg-white rounded">
-                  <div className='text-grey h6'>Add Book</div>
+                  <div className='text-grey h6 fw-bold'>Add Book</div>
                   <hr />
                   <form onSubmit={handleSubmit}>
-                    <label className='fw-bold'>Class*</label><br />
+                    <label className='fw-bold'>Class<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={selectedClass}
                       required
                       onChange={(e) => setSelectedClass(e.target.value)}
                     >
-                      <option value="">Select Class</option>
+                      <option value="">--Select Class--</option>
                       {classes.map((cls) => (
                         <option key={cls.class_id} value={cls.class_id}>{cls.class_name}</option>
                       ))}
                     </select><br /><br />
 
-                    <label className='fw-bold'>Subject*</label><br />
+                    <label className='fw-bold'>Subject<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={selectedSubject}
                       required
                       onChange={(e) => setSelectedSubject(e.target.value)}
                     >
-                      <option value="">Select Subject</option>
+                      <option value="">--Select Subject--</option>
                       {subjects.map((sub) => (
                         <option key={sub.subject_id} value={sub.subject_id}>{sub.subject_name}</option>
                       ))}
                     </select><br /><br />
 
-                    <label className='fw-bold'>Series*</label><br />
+                    <label className='fw-bold'>Series<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={selectedSeries}
                       required
                       onChange={(e) => setSelectedSeries(e.target.value)}
                     >
-                      <option value="">Select Series</option>
+                      <option value="">--Select Series--</option>
                       {series.map((ser) => (
                         <option key={ser.series_id} value={ser.series_id}>{ser.series_name}</option>
                       ))}
                     </select><br /><br />
 
-                    <label className='fw-bold'>Book Name*</label><br />
+                    <label className='fw-bold'>Book Name<span className= 'text-danger'>*</span></label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       placeholder='Enter Book Name'
                       value={bookName}
                       required
                       onChange={(e) => setBookName(e.target.value)}
                     /><br /><br />
 
-                    <label className='fw-bold'>Book Code*</label><br />
+                    <label className='fw-bold'>Book Code<span className= 'text-danger'>*</span></label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       placeholder='Enter Book Code'
                       value={bookCode}
                       required
@@ -183,23 +183,23 @@ const AddBook = () => {
 
                     <label className='fw-bold'>Book Download Link</label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       placeholder='Enter Book Download Link'
                       value={bookDownloadLink}
                       onChange={(e) => setBookDownloadLink(e.target.value)}
                     /><br /><br />
 
-                    <label className='fw-bold'>Android Download Link</label><br />
+                    <label className='fw-bold'>TPG Download Link</label><br />
                     <input
-                      className='custom-input mt-3 cursor'
-                      placeholder='Enter Android Download Link'
+                      className='custom-input mt-1 cursor'
+                      placeholder='Enter TPG Download Link'
                       value={androidDownloadLink}
                       onChange={(e) => setAndroidDownloadLink(e.target.value)}
                     /><br /><br />
 
                     <label className='fw-bold'>Book Description</label><br />
                     <textarea
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       placeholder='Enter Book Description'
                       value={bookDescription}
                       onChange={(e) => setBookDescription(e.target.value)}
@@ -208,7 +208,7 @@ const AddBook = () => {
                     <label className='fw-bold'>Book Cover</label><br />
                     <input
                       type="file"
-                      className=' mt-3 cursor'
+                      className='form-control mt-1 cursor'
                       onChange={(e) => setBookCover(e.target.files[0])}
                     /><br /><br />
                     <div className= 'd-flex justify-content-end'>

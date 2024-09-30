@@ -115,7 +115,7 @@ const Schools = () => {
               <div className="container mt-3 bg-white shadow-lg p-3 mb-5 bg-white rounded">
               <div className="row ">
                 <div className="  col-md-12 text-right d-flex justify-content-between ">
-                <div className='text-grey h5 my-2 '>Schools</div>
+                <div className='text-grey h5 my-2 '>Manage Schools</div>
                   <Link to={'/addschools'}><button className="btn btn-primary">+ Add School</button></Link>
                 </div>
               </div>
@@ -135,16 +135,16 @@ const Schools = () => {
               {/* Table */}
               <div className="row mt-3">
                 <div className="col-md-12 table-responsive">
-                  <table className="table table table-bordered table-sm table-striped table-hover">
+                  <table className="table table-sm table-bordered">
                     <thead className= 'table-secondary'>
                       <tr>
-                        <th scope="col">SNo</th>
-                        <th scope="col">School</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Contact Info</th>
-                        <th scope="col">Location Info</th>
+                        <th scope="col">S.no</th>
+                        <th scope="col">School Name</th>
+                        <th scope="col">School Address</th>
+                        <th scope="col">School Contact Info</th>
+                        <th scope="col">School Location Info</th>
                         <th scope="col">School Logo</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">School Status</th>
                         <th scope="col">Actions</th>
                       </tr>
                     </thead>
@@ -154,12 +154,12 @@ const Schools = () => {
                           <td>{index+1}</td>
                           <td>{item.school_name}</td>
                           <td>{item.school_address}</td>
-                          <td>Email: {item.email}<br></br>Phone: {item.contact_no}</td>
-                          <td>Country: {item.country}<br></br>State: {item.state}<br></br>City: {item.city}</td>
+                          <td className= 'comb'><b>Email:</b> {item.email}<br></br><b>Phone:</b> {item.contact_no}</td>
+                          <td className= 'comb'><b>Country:</b> {item.country}<br></br><b>State:</b> {item.state}<br></br><b>City:</b> {item.city}</td>
                           <td>
 
                           {item.school_logo && (
-                              <img src={`${config.apiBaseUrl}/fullmarks-server/uploads/school_logo/${item.school_logo}`} alt="Page Image" style={{ width: '50px' }} />
+                              <img src={`${config.apiBaseUrl}/fullmarks-server/uploads/school_logo/${item.school_logo}`} alt="Page Image" style={{ width: '100px', borderRadius: '50%' }} />
                             )}
 
                           </td>
@@ -174,7 +174,7 @@ const Schools = () => {
                           <td>
                             <Link to={`/updateschools/${encodeId(item.school_id)}`}>
                               <button className="btn btn-sm btn-secondary mx-1">
-                                Edit School
+                                Edit
                               </button>
                             </Link>
                             <Link to={`/assignbookschools/${encodeId(item.school_id)}`}>
@@ -187,7 +187,7 @@ const Schools = () => {
                               className="btn btn-sm btn-danger mx-1"
                               onClick={() => handleDelete(item.school_id)}
                             >
-                              Delete School
+                              Delete 
                             </button>
                             
                           </td>

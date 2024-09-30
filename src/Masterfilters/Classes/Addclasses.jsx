@@ -47,9 +47,9 @@ const Addclasses = () => {
                 <div className='text-dark h6 fw-bold'>Add Class</div>
                 <hr></hr>
                   <form onSubmit={handleSubmit}>
-                    <label className= 'fw-bold'>Class*</label>
+                    <label className= 'fw-bold'>Class<span className= 'text-danger'>*</span></label>
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       placeholder='Enter Class Name'
                       required = "true"
                       value={className}

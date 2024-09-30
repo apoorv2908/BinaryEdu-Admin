@@ -18,7 +18,7 @@ const Addbookpages = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchBookDetails();
+    fetchBookDetails(); 
     fetchChapters();
   }, []);
 
@@ -91,21 +91,21 @@ const Addbookpages = () => {
             <div className="container mt-3">
               <div className="row">
                 <div className="col-md-12 bg-white shadow-lg p-3 mb-5 bg-white rounded">
-                <div className='text-grey h6'>Add Book Pages - {bookName}</div>
+                <div className='text-grey fw-bold h6'>Add Book Pages: {bookName}</div>
                 <hr></hr>
                   <form onSubmit={handleSubmit}>
-                    <label className='fw-bold'>Page Title*</label><br />
+                    <label className='fw-bold'>Page Title<span className= 'text-danger'>*</span></label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input cursor'
                       placeholder='Enter Page Title'
                       value={pageTitle}
                       required
                       onChange={(e) => setPageTitle(e.target.value)}
                     /><br /><br />
 
-                    <label className='fw-bold'>Chapter Name*</label><br />
+                    <label className='fw-bold'>Chapter Name<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input cursor'
                       value={chapterName}
                       required
                       onChange={(e) => setChapterName(e.target.value)}
@@ -116,10 +116,10 @@ const Addbookpages = () => {
                       ))}
                     </select><br /><br />
 
-                    <label className='fw-bold'>Upload Image</label><br />
+                    <label className='fw-bold'>Upload Page Image<span className= 'text-danger'>*</span></label><br />
                     <input
                       type="file"
-                      className=' mt-3 cursor'
+                      className=' cursor form-control'
                       accept=".png, .jpg, .jpeg"
                       onChange={(e) => setImage(e.target.files[0])}
                     /><br /><br />

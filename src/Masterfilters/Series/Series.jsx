@@ -92,8 +92,8 @@ const Series = () => {
               <div className="container mt-3  bg-light shadow-lg p-3 mb-5 bg-white rounded">
               <div className="row ">
                 <div className="col-md-12 d-flex justify-content-between ">
-                <div className='text-grey fw-bold h5'>Series</div>
-                  <Link to={'/addseries'}><button className="btn btn-primary">+ Add New Series</button></Link>
+                <div className='text-grey  h5'>Manage Series</div>
+                  <Link to={'/addseries'}><button className="btn btn-primary">+ Add Series</button></Link>
                 </div>
               </div>
               <hr />
@@ -115,13 +115,13 @@ const Series = () => {
               {/* Table */}
               <div className="row mt-3">
                 <div className="col-md-12 table-responsive">
-                  <table className= "table table table-sm table-bordered table-striped table-hover ">
+                  <table className= "table table table-sm  table-bordered table-hover ">
                     <thead className= 'table-light'>
                       <tr>
-                        <th>SNo</th>
-                        <th>Series</th>
-                        <th>Class</th>
-                        <th>Subject</th>
+                        <th>S.no.</th>
+                        <th>Series Name</th>
+                        <th>Class Name</th>
+                        <th>Subject Name</th>
                         <th>Actions</th>
                       </tr>
                     </thead>

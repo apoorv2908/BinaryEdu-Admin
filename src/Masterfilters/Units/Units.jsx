@@ -106,7 +106,7 @@ const Units = () => {
 
               <div className="row">
                 <div className="col-md-12 d-flex justify-content-between">
-                <div className='text-grey h5'>Units</div>
+                <div className='text-grey h5'>Manage Units</div>
                   <Link to={'/addunits'}><button className="btn btn-primary">+ Add Unit</button></Link>
                 </div>
               </div>
@@ -125,7 +125,7 @@ const Units = () => {
               {/* Table */}
               <div className="row mt-3">
                 <div className="col-md-12">
-                  <table className="table table table-sm table-bordered table-striped table-hover">
+                  <table className="table table table-sm  table-bordered">
                     <thead className= 'table-light'>
                       <tr>
                         <th
@@ -133,7 +133,7 @@ const Units = () => {
                           style={{ cursor: 'pointer' }}
                           onClick={() => handleSort('sno')}
                         >
-                          SNo {renderSortIcon('sno')}
+                          S.no {renderSortIcon('sno')}
                         </th>
                         <th
                           scope="col"
@@ -147,35 +147,35 @@ const Units = () => {
                           style={{ cursor: 'pointer' }}
                           onClick={() => handleSort('class_name')}
                         >
-                          Class {renderSortIcon('class_name')}
+                          Class Name {renderSortIcon('class_name')}
                         </th>
                         <th
                           scope="col"
                           style={{ cursor: 'pointer' }}
                           onClick={() => handleSort('subject_name')}
                         >
-                          Subject {renderSortIcon('subject_name')}
+                          Subject Name {renderSortIcon('subject_name')}
                         </th>
                         <th
                           scope="col"
                           style={{ cursor: 'pointer' }}
                           onClick={() => handleSort('series_name')}
                         >
-                          Series {renderSortIcon('series_name')}
+                          Series Name {renderSortIcon('series_name')}
                         </th>
                         <th
                           scope="col"
                           style={{ cursor: 'pointer' }}
                           onClick={() => handleSort('book_name')}
                         >
-                          Book {renderSortIcon('book_name')}
+                          Book Name {renderSortIcon('book_name')}
                         </th>
                         <th
                           scope="col"
                           style={{ cursor: 'pointer' }}
                           onClick={() => handleSort('section_name')}
                         >
-                          Section {renderSortIcon('section_name')}
+                          Section Name {renderSortIcon('section_name')}
                         </th>
                         <th scope="col">Actions</th>
                       </tr>

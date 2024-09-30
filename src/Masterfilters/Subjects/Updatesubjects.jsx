@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import config from '../../Access/config';
 import Topbar from '../../Dashboard/Topbar';
 import { decodeId } from '../../Access/Encodedecode';
@@ -9,9 +10,7 @@ const Updatesubject = () => {
   const { id } = useParams();
   const decodedId = decodeId(id); // Decode the ID for internal use
   const navigate = useNavigate();
-  const [subjectData, setSubjectData] = useState({ subjectName: '', sortOrder: '' });
-  const [successMessage, setSuccessMessage] = useState('');
-  const [showPopup, setShowPopup] = useState(false);
+  const [subjectData, setSubjectData] = useState({ subjectName: '', subjectContent: '' });
 
   useEffect(() => {
     fetchSubjectData();
@@ -22,7 +21,10 @@ const Updatesubject = () => {
       const response = await fetch(`${config.apiBaseUrl}/fullmarks-server/Masterfilter/Subjects/getSubject.php?subject_id=${decodedId}`);
       const data = await response.json();
       if (data.success) {
-        setSubjectData({ subjectName: data.subject.subject_name, sortOrder: data.subject.sort_order });
+        setSubjectData({ 
+          subjectName: data.subject.subject_name, 
+          subjectContent: data.subject.subject_content 
+        });
       } else {
         alert('Failed to fetch subject data');
       }
@@ -32,11 +34,18 @@ const Updatesubject = () => {
     }
   };
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setSubjectData((prevState) => ({
       ...prevState,
       [name]: value,
+    }));
+  };
+
+  const handleContentChange = (content) => {
+    setSubjectData((prevState) => ({
+      ...prevState,
+      subjectContent: content,
     }));
   };
 
@@ -52,10 +61,8 @@ const Updatesubject = () => {
       });
       const data = await response.json();
       if (data.success) {
-
         alert('Subject updated successfully');
         navigate('/subjects');
-
       } else {
         alert('Failed to update subject');
       }
@@ -76,38 +83,45 @@ const Updatesubject = () => {
             <div className="container mt-3">
               {/* Topbar */}
               <div className="row">
-              <div className="col-md-12 bg-white shadow-lg p-3 mb-5 bg-white rounded">
-              <div className='text-grey h6'>Update Subject</div>
-              <hr></hr>
-                <form onSubmit={handleSubmit}>
-                  <div className="form-group">
-                    <label htmlFor="subjectName" className='mb-2'><b>Subject</b></label>
-                    <input
-                      type="text"
-                      className="custom-input cursor"
-                      id="subjectName"
-                      name="subjectName"
-                      value={subjectData.subjectName}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <br></br>
-                  <div className='d-flex justify-content-end'>
-                    <button type="submit" className="btn btn-primary mt-3 mx-3">Update Subject</button>
-                    <Link to = "/subjects"><button className="btn btn-danger mt-3">Cancel</button></Link>
-
-                  
-                  </div>
-                </form>
-                
+                <div className="col-md-12 bg-white shadow-lg p-3 mb-5 bg-white rounded">
+                  <div className='text-grey h6'>Update Subject</div>
+                  <hr />
+                  <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                      <label htmlFor="subjectName" className='mb-2'><b>Subject</b></label>
+                      <input
+                        type="text"
+                        className="custom-input cursor"
+                        id="subjectName"
+                        name="subjectName"
+                        value={subjectData.subjectName}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+                    <br />
+                    <div className="form-group">
+                      <label htmlFor="subjectContent" className='mb-2'><b>Subject Content</b></label>
+                      <ReactQuill
+                        theme="snow"
+                        value={subjectData.subjectContent}
+                        onChange={handleContentChange}
+                        id="subjectContent"
+                        required
+                      />
+                    </div>
+                    <br />
+                    <div className='d-flex justify-content-end'>
+                      <button type="submit" className="btn btn-primary mt-3 mx-3">Update Subject</button>
+                      <Link to="/subjects"><button className="btn btn-danger mt-3">Cancel</button></Link>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
       </div>
-      
     </div>
   );
 };

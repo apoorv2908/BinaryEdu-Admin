@@ -28,7 +28,7 @@ const Updateunits = () => {
 
   const fetchUnit = async () => {
     try {
-      const response = await fetch(`${config.apiBaseUrl}/fullmarks-server/Masterfilter/Units/getunit.php?unit_id=${decodedId}`);
+      const response = await fetch(`${config.apiBaseUrl}/fullmarks-server/Masterfilter/Units/getUnit.php?unit_id=${decodedId}`);
       const data = await response.json();
       if (data.success) {
         const unitData = data.unit;
@@ -158,16 +158,16 @@ const Updateunits = () => {
           <Topbar />
           {/* Main content */}
           <div className="col-md-12">
-            <div className="container mt-3">
+            <div className="container ">
               {/* Topbar */}
               <div className="row">
-                <div className="col-md-12 bg-white shadow-lg p-3 mb-5 bg-white rounded">
+                <div className="col-md-12 mt-3 bg-white shadow-lg p-3 mb-5 bg-white rounded">
                 <div className='text-grey h6'>Update Unit</div>
                 <hr></hr>
                   <form onSubmit={handleSubmit}>
                     <label className= 'fw-bold'>Class</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={selectedClass}
                       onChange={(e) => {
                         setSelectedClass(e.target.value);
@@ -181,7 +181,7 @@ const Updateunits = () => {
                     </select><br /><br></br>
                     <label className= 'fw-bold'>Subject</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={selectedSubject}
                       onChange={(e) => {
                         setSelectedSubject(e.target.value);
@@ -195,7 +195,7 @@ const Updateunits = () => {
                     </select><br /><br></br>
                     <label className= 'fw-bold'>Series</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={selectedSeries}
                       onChange={(e) => {
                         setSelectedSeries(e.target.value);
@@ -209,7 +209,7 @@ const Updateunits = () => {
                     </select><br /><br></br>
                     <label className= 'fw-bold'>Book</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={selectedBook}
                       onChange={(e) => {
                         setSelectedBook(e.target.value);
@@ -223,7 +223,7 @@ const Updateunits = () => {
                     </select><br /><br></br>
                     <label className= 'fw-bold'>Section</label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={selectedSection}
                       onChange={(e) => setSelectedSection(e.target.value)}
                     >
@@ -234,7 +234,7 @@ const Updateunits = () => {
                     </select><br /><br></br>
                     <label className= 'fw-bold'>Unit Title</label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       placeholder='Enter Unit Title'
                       value={unitTitle}
                       onChange={(e) => setUnitTitle(e.target.value)}

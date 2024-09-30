@@ -21,11 +21,29 @@ const Addlibrary = () => {
   const [documentFile, setDocumentFile] = useState(null);
   const [thumbImage, setThumbImage] = useState(null);
   const [audioFile, setAudioFile] = useState(null);
+  const [interactivitiesFile, setInteractivitesFile] = useState(null);
+  const [interactivitiesLink, setInteractivitesLink] = useState(null);
+
+  const [addnworksheetsFile,   setAddnworksheetsFile  ] = useState(null);
+  const [addnworksheetsLink,   setAddnworksheetsLink  ] = useState(null);
+
+  
+  const [addnactivitiesFile,   setAddnactivitiesFile  ] = useState(null);
+  const [addnactivitiesLink,   setAddnactivitiesLink  ] = useState(null);
+
+
+  
+  const [answerkeysFile,   setAnswerkeysFile  ] = useState(null);
+  const [answerkeysLink,   setAnswerkeysLink  ] = useState(null);
+
+
+
   const [videoLink, setVideoLink] = useState('');
   const [documentLink, setDocumentLink] = useState('');
   const [lessonPlanLink, setLessonPlanLink] = useState('');
   const [audioLink, setAudioLink] = useState('');
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     fetchClasses();
@@ -108,7 +126,7 @@ const Addlibrary = () => {
 
   const fetchChapters = async (classId, subjectId, seriesId, bookId) => {
     try {
-      const response = await fetch(`${config.apiBaseUrl}/fullmarks-server/Masterfilter/Chapters/fetchchapters.php?class_id=${classId}&subject_id=${subjectId}&series_id=${seriesId}&book_id=${bookId}`);
+      const response = await fetch(`${config.apiBaseUrl}/fullmarks-server/Masterfilter/Book/fetchchapterforbook.php?class_id=${classId}&subject_id=${subjectId}&series_id=${seriesId}&book_id=${bookId}`);
       const data = await response.json();
       if (data.success) {
         setChapters(data.chapters);
@@ -144,6 +162,18 @@ const Addlibrary = () => {
     } else if (resourceType === 'audio') {
       formData.append('audioFile', audioFile);
       formData.append('audioLink', audioLink);
+    }else if (resourceType === 'interactivities') {
+      formData.append('interactivitiesFile', interactivitiesFile);
+      formData.append('interactivitiesLink',interactivitiesLink);
+    }else if (resourceType === 'addnworksheets') {
+      formData.append('addnworksheetsFile',addnworksheetsFile);
+      formData.append('addnworksheetsLink', addnworksheetsLink);
+    }else if (resourceType === 'addnactivities') {
+      formData.append('addnactivitiesFile',addnactivitiesFile);
+      formData.append('addnactivitiesLink', addnactivitiesLink);
+    }else if (resourceType === 'answerkeys') {
+      formData.append('answerkeysFile',answerkeysFile);
+      formData.append('answerkeysLink', answerkeysLink);
     }
 
     try {
@@ -176,12 +206,12 @@ const Addlibrary = () => {
               {/* Topbar */}
               <div className="row">
                 <div className="col-md-12 bg-white shadow-lg p-3 mb-5 bg-white rounded">
-                  <div className='text-grey h6'>Add Library Resource</div>
+                  <div className='text-grey h6'>Add Resource</div>
                   <hr></hr>
                   <form onSubmit={handleSubmit}>
-                    <label className='fw-bold'>Class</label><br />
+                    <label className='fw-bold'>Class<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input cursor'
                       value={selectedClass}
                       required
                       onChange={(e) => {
@@ -194,9 +224,9 @@ const Addlibrary = () => {
                         <option key={cls.class_id} value={cls.class_id}>{cls.class_name}</option>
                       ))}
                     </select><br /><br></br>
-                    <label className='fw-bold'>Subject</label><br />
+                    <label className='fw-bold'>Subject<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input cursor'
                       value={selectedSubject}
                       required
                       onChange={(e) => {
@@ -209,9 +239,9 @@ const Addlibrary = () => {
                         <option key={sub.subject_id} value={sub.subject_id}>{sub.subject_name}</option>
                       ))}
                     </select><br /><br></br>
-                    <label className='fw-bold'>Series</label><br />
+                    <label className='fw-bold'>Series<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input  cursor'
                       value={selectedSeries}
                       required
                       onChange={(e) => {
@@ -224,9 +254,9 @@ const Addlibrary = () => {
                         <option key={ser.series_id} value={ser.series_id}>{ser.series_name}</option>
                       ))}
                     </select><br /><br></br>
-                    <label className='fw-bold'>Book</label><br />
+                    <label className='fw-bold'>Book<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input cursor'
                       value={selectedBook}
                       required
                       onChange={(e) => {
@@ -239,9 +269,9 @@ const Addlibrary = () => {
                         <option key={book.book_id} value={book.book_id}>{book.book_name}</option>
                       ))}
                     </select><br /><br></br>
-                    <label className='fw-bold'>Chapter</label><br />
+                    <label className='fw-bold'>Chapter<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input cursor'
                       value={selectedChapter}
                       required
                       onChange={(e) => setSelectedChapter(e.target.value)}
@@ -251,50 +281,62 @@ const Addlibrary = () => {
                         <option key={chap.chapter_id} value={chap.chapter_id}>{chap.chapter_title}</option>
                       ))}
                     </select><br /><br></br>
-                    <label className='fw-bold'>Resource Title</label><br />
+                    <label className='fw-bold'>Resource Title<span className= 'text-danger'>*</span></label><br />
                     <input
-                      className='custom-input mt-3'
+                      className='custom-input'
                       type="text"
                       value={resourceTitle}
+                      placeholder = "Enter Resource Title"
                       required
                       onChange={(e) => setResourceTitle(e.target.value)}
                     /><br /><br></br>
-                    <label className='fw-bold'>Resource Type</label><br />
+                    <label className='fw-bold'>Resource Type<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input cursor'
                       value={resourceType}
                       required
                       onChange={(e) => setResourceType(e.target.value)}
-                    >
-                      <option value="">Select Resource Type</option>
+                    > 
+                      <option value="">--Select Resource Type--</option>
                       <option value="videos">Videos</option>
                       <option value="documents">Documents</option>
-                      <option value="lessonplans">Lesson Plans</option>
                       <option value="audio">Audio</option>
+                      <option value="interactivities">Interactivities</option>
+                      <option value="addnworksheets">Additional Worksheets</option>
+                      <option value="addnactivities">Additional Activities</option>
+                      <option value="answerkeys">Answer Keys</option>
+
                     </select><br /><br></br>
+                    <div class= 'bg-light'>
                     {resourceType === 'videos' && (
                       <>
-                        <label className='fw-bold'>Video File</label><br />
+                      <div className= 'mx-5'>
+                        <label className=' mt-2 fw-bold'>Video File</label><br />
                         <input
-                          className=' mt-3'
+                          className='  form-control'
                           type="file"
+                          accept='.mp4'
                           onChange={(e) => setVideoFile(e.target.files[0])}
                         /><br /><br></br>
                         <div className= 'd-flex justify-content-center fw-bold'>OR</div>
                         <label className='fw-bold'>Enter Video Link</label><br />
                         <input
-                          className='custom-input mt-3'
+                          className='custom-input '
                           type="text"
                           value={videoLink}
                           onChange={(e) => setVideoLink(e.target.value)}
+                          placeholder= 'Enter Video URL/Link '
                         /><br /><br></br>
+                        </div>
                       </>
                     )}
                     {(resourceType === 'documents' || resourceType === 'lessonplans') && (
                       <>
-                        <label className='fw-bold'>Document File</label><br />
+                                            <div className= 'mx-5'>
+
+                        <label className='fw-bold mt-2'>Document File</label><br />
                         <input
-                          className=' mt-3'
+                          className='form-control'
                           type="file"
                           onChange={(e) => setDocumentFile(e.target.files[0])}
                         /><br /><br></br>
@@ -302,33 +344,139 @@ const Addlibrary = () => {
 
                         <label className='fw-bold'>Enter Document Link</label><br />
                         <input
-                          className='custom-input mt-3'
+                          className='custom-input'
                           type="text"
                           value={documentLink}
+                          placeholder='Enter Document URL/Link'
                           onChange={(e) => setDocumentLink(e.target.value)}
                         /><br /><br></br>
+                        </div>
                       </>
                     )}
-                    {resourceType === 'audio' && (
+
+{resourceType === 'audio' && (
                       <>
-                        <label className='fw-bold'>Audio File</label><br />
+                      <div className= 'mx-5'>
+                        <label className=' mt-2 fw-bold'>Audio File</label><br />
                         <input
-                          className=' mt-3'
+                          className='  form-control'
                           type="file"
+                          accept='.mp3'
                           onChange={(e) => setAudioFile(e.target.files[0])}
                         /><br /><br></br>
-                                                <div className= 'd-flex justify-content-center fw-bold'>OR</div>
-
+                        <div className= 'd-flex justify-content-center fw-bold'>OR</div>
                         <label className='fw-bold'>Enter Audio Link</label><br />
                         <input
-                          className='custom-input mt-3'
+                          className='custom-input '
                           type="text"
                           value={audioLink}
                           onChange={(e) => setAudioLink(e.target.value)}
+                          placeholder= 'Enter Audio URL/Link '
                         /><br /><br></br>
+                        </div>
                       </>
                     )}
+
+                    {resourceType === 'interactivities' && (
+                      <>
+                      <div className= 'mx-5'>
+                        <label className='fw-bold mt-2'> Interactivities File</label><br />
+                        <input
+  className=' form-control'
+  type="file"
+  accept='.mp3'
+
+  onChange={(e) => setInteractivitesFile(e.target.files[0])}
+/>
+
+                        <br /><br></br>
+                        <div className= 'd-flex justify-content-center fw-bold'>OR</div>
+
+                        <label className='fw-bold'>Enter URL</label><br />
+                        <input
+                          className='custom-input'
+                          type="text"
+                          placeholder= 'Enter Interactivites URL/Link '
+                          value={interactivitiesLink}
+                          onChange={(e) => setInteractivitesLink(e.target.value)}
+                        /><br /><br></br>
+                      </div>
+                      </>
+                    )}
+
+{resourceType === 'addnworksheets' && (
+                      <>
+                      <div className= 'mx-5'>
+                        <label className=' mt-2 fw-bold'>Additional Worksheets File</label><br />
+                        <input
+                          className='  form-control'
+                          type="file"
+                          onChange={(e) => setAddnworksheetsFile(e.target.files[0])}
+                        /><br /><br></br>
+                        <div className= 'd-flex justify-content-center fw-bold'>OR</div>
+                        <label className='fw-bold'>Add Link/URL</label><br />
+                        <input
+                          className='custom-input '
+                          type="text"
+                          value={addnworksheetsLink}
+                          onChange={(e) => setAddnworksheetsLink(e.target.value)}
+                          placeholder= 'Enter Additional Worksheets  URL/Link '
+                        /><br /><br></br>
+                        </div>
+                      </>
+                    )}
+
+{resourceType === 'addnactivities' && (
+                      <>
+                      <div className= 'mx-5'>
+                        <label className=' mt-2 fw-bold'>Add Additional Activities</label><br />
+                        <input
+                          className='  form-control'
+                          type="file"
+                          onChange={(e) => setAddnactivitiesFile(e.target.files[0])}
+                        /><br /><br></br>
+                        <div className= 'd-flex justify-content-center fw-bold'>OR</div>
+                        <label className='fw-bold'>Add Link/URL</label><br />
+                        <input
+                          className='custom-input '
+                          type="text"
+                          value={addnactivitiesLink}
+                          onChange={(e) => setAddnactivitiesLink(e.target.value)}
+                          placeholder= 'Enter Video URL/Link '
+                        /><br /><br></br>
+                        </div>
+                      </>
+                    )}
+
+{resourceType === 'answerkeys' && (
+                      <>
+                      <div className= 'mx-5'>
+                        <label className=' mt-2 fw-bold'>Answer Keys File</label><br />
+                        <input
+                          className='  form-control'
+                          type="file"
+                          onChange={(e) => setAnswerkeysFile(e.target.files[0])}
+                        /><br /><br></br>
+                        <div className= 'd-flex justify-content-center fw-bold'>OR</div>
+                        <label className='fw-bold'>Add Link/URL</label><br />
+                        <input
+                          className='custom-input '
+                          type="text"
+                          value={answerkeysLink}
+                          onChange={(e) => setAnswerkeysLink(e.target.value)}
+                          placeholder= 'Enter Answer Keys URL/Link '
+                        /><br /><br></br>
+                        </div>
+                      </>
+                    )}
+
+
+                    
+
+                    </div>
+                    <div className= 'd-flex justify-content-end mt-3 '>
                     <button className="btn btn-primary" type="submit">Submit</button>
+                    </div>
                   </form>
                 </div>
               </div>

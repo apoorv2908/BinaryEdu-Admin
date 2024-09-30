@@ -47,6 +47,8 @@ import Assignbookstudents from './Users/Students/Assignbookstudents';
 import Updateunits from './Masterfilters/Units/Updateunits';
 import Updatechapter from './Masterfilters/Chapters/Updatechapter';
 import Page from "./Access/Page";
+import AddAboutUs from "./CMS/Aboutus/AddAboutUs";
+import UpdateAboutUs from "./CMS/Aboutus/UpdateAboutUs";
 
 function App() {
   return (
@@ -127,6 +129,32 @@ function App() {
                                 <Page title="Units - Binary Education">
 
                 <Units />
+
+                </Page>
+              </PrivateRoute>
+            }
+          />
+
+<Route
+            path="/addaboutus"
+            element={
+              <PrivateRoute>
+                                <Page title="About us - Binary Education">
+
+                <AddAboutUs />
+
+                </Page>
+              </PrivateRoute>
+            }
+          />
+
+<Route
+            path="/updateaboutus"
+            element={
+              <PrivateRoute>
+                                <Page title="About us - Binary Education">
+
+                <UpdateAboutUs />
 
                 </Page>
               </PrivateRoute>
@@ -380,7 +408,7 @@ function App() {
             }
           />
           <Route
-            path="/editbookpage/:book_id"
+            path="/updatebookpage/:page_id"
             element={
               <PrivateRoute>
                                 <Page title="Edit Book Page - Binary Education">

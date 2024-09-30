@@ -124,94 +124,95 @@ const Addschools = () => {
             <div className="container mt-3">
               <div className="row">
                 <div className="col-md-12 bg-white shadow-lg p-3 mb-5 bg-white rounded">
-                  <div className='text-grey h6'>
+                  <div className='text-grey h6 fw-bold'>
                      Add School
                   </div>
                   <hr></hr>
                   <form onSubmit={handleSubmit} encType="multipart/form-data">
-                    <label className='fw-bold'>School Name*</label>
+                    <label className='fw-bold'>School Name<span className= 'text-danger'>*</span></label>
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       placeholder='Enter School Name'
                       value={schoolName}
                       onChange={(e) => setSchoolName(e.target.value)}
                       required
                     /><br /><br></br>
-                    <label className='fw-bold'>School Address</label>
+                    <label className='fw-bold'>School Address<span className= 'text-danger'>*</span></label>
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       placeholder='Enter School Address'
                       value={schoolAddress}
                       onChange={(e) => setSchoolAddress(e.target.value)}
                       required
                     /><br /><br></br>
-                    <label className='fw-bold'>Password</label><br />
+                    <label className='fw-bold'>School Email<span className= 'text-danger'>*</span></label><br />
                     <input
-                      className='custom-input mt-3 cursor'
-                      type='password'
-                      placeholder='Enter Password'
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                    /><br /><br></br>
-                    <label className='fw-bold'>School Email*</label><br />
-                    <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       type='email'
                       placeholder='Enter Email'
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
                     /><br /><br></br>
-                    <label className='fw-bold'>School Contact Number</label><br />
+                    <label className='fw-bold'>School Contact Number<span className= 'text-danger'>*</span></label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       placeholder='Enter Contact Number'
                       value={contactNumber}
                       onChange={(e) => setContactNumber(e.target.value)}
                       required
                     /><br /><br></br>
-                    <label className='fw-bold'>Country</label><br />
+                    <label className='fw-bold'>Country<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={country}
                       required
                       onChange={(e) => setCountry(e.target.value)}
                     >
-                      <option value="">Select Country</option>
+                      <option value="">--Select Country--</option>
                       {countries.map((country) => (
                         <option key={country.iso2} value={country.iso2}>{country.name}</option>
                       ))}
                     </select><br /><br></br>
-                    <label className='fw-bold'>State</label><br />
+                    <label className='fw-bold'>State<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={state}
                       required
                       onChange={(e) => setState(e.target.value)}
                     >
-                      <option value="">Select State</option>
+                      <option value="">--Select State--</option>
                       {states.map((state) => (
                         <option key={state.iso2} value={state.iso2}>{state.name}</option>
                       ))}
                     </select><br /><br></br>
-                    <label className='fw-bold'>City</label><br />
+                    <label className='fw-bold'>City<span className= 'text-danger'>*</span></label><br />
                     <select
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       value={city}
                       required
                       onChange={(e) => setCity(e.target.value)}
                     >
-                      <option value="">Select City</option>
+                      <option value="">--Select City--</option>
                       {cities.map((city) => (
                         <option key={city.id} value={city.name}>{city.name}</option>
                       ))}
                     </select><br /><br></br>
-                    <label className='fw-bold'>School Logo <span className= 'h6 text-grey'>(max size: 2 MB, jpg/jpeg/png/gif)</span></label><br />
+                    <label className='fw-bold'>School Logo <span className= 'text-success' style = {{fontSize: "13px"}}>[ jpg, jpeg, png (max size: 2 MB) ]</span></label><br />
                     <input
-                      className='mt-3 cursor'
+                      className='form-control mt-1 cursor'
                       type='file'
                       onChange={(e) => setProfilePic(e.target.files[0])}
+                    /><br></br>
+                    <hr></hr>
+                    <label className='fw-bold'>Password<span className= 'text-danger'>*</span></label><br />
+                    <input
+                      className='custom-input mt-1 cursor'
+                      type='password'
+                      placeholder='Enter Password'
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
                     /><br /><br></br>
                     <div className='d-flex justify-content-end'>
                     <Link to = "/schools"><button  className="btn btn-danger mt-3">Cancel</button></Link>

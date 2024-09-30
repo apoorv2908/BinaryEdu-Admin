@@ -115,7 +115,7 @@ const Teachers = () => {
               {/* Topbar */}
               <div className="row">
                 <div className="col-md-12 d-flex justify-content-between">
-                  <div className='text-grey h5'>Teachers</div>
+                  <div className='text-grey h5'>Manage Teachers</div>
                   <Link to={'/addteachers'}><button className="btn btn-primary" >+ Add Teacher</button></Link>
                 </div>
               </div>
@@ -134,16 +134,16 @@ const Teachers = () => {
               {/* Table */}
               <div className="row mt-3">
                 <div className="col-md-12 table-responsive">
-                  <table className="table table-sm table-striped table-bordered table-hover">
+                  <table className="table table-sm table-bordered">
                     <thead className='table-secondary'>
                       <tr>
-                        <th scope="col">SNo</th>
-                        <th scope="col">Teacher</th>
-                        <th scope="col">School</th>
-                        <th scope="col">Contact Info</th>
-                        <th scope="col">Location Info</th>
-                        <th scope="col">Assigned Books</th>
-                        <th scope="col">Profile pic</th>
+                        <th scope="col">S.no</th>
+                        <th scope="col">Teacher Name</th>
+                        <th scope="col">Teacher School Name</th>
+                        <th scope="col">Teacher Contact Info</th>
+                        <th scope="col">Teacher Location Info</th>
+                        <th scope="col">Teacher Assigned Books</th>
+                        <th scope="col"> Teacher Profile Pic</th>
                         <th scope="col">Status</th>
                         <th scope="col">Actions</th>
                       </tr>
@@ -154,13 +154,13 @@ const Teachers = () => {
                           <td>{getSNo(index)}</td>
                           <td>{item.teacher_name}</td>
                           <td>{item.school_name}</td>
-                          <td className='h6'><b>Email:</b> {item.email}<br /><b>Contact:</b> {item.contact_no}</td>
-                          <td className='h6'><b>Country:</b> {item.country}<br /><b>State:</b> {item.state}<br /><b>City:</b> {item.city}</td>
+                          <td className='comb'><b>Email:</b> {item.email}<br /><b>Contact:</b> {item.contact_no}</td>
+                          <td className='comb'><b>Country:</b> {item.country}<br /><b>State:</b> {item.state}<br /><b>City:</b> {item.city}</td>
                           <td>{item.assigned_books}</td>
                           <td>
 
                           {item.profile_pic && (
-                              <img src={`${config.apiBaseUrl}/fullmarks-server/uploads/teachers/${item.profile_pic}`} alt="Page Image" style={{ width: '50px' }} />
+                              <img style = {{borderRadius: "50%", width: '70px' }} src={`${config.apiBaseUrl}/fullmarks-server/uploads/teachers/${item.profile_pic}`} alt="No Image"  />
                             )}
 
                             
@@ -175,25 +175,26 @@ const Teachers = () => {
                             </button>
                           </td>
                           <td>
-                            <Link to={`/updateteacher/${encodeId(item.teacher_id)}`}>
-                              <button className="btn btn-sm btn-secondary">
-                                Edit
-                              </button>
-                            </Link>
-                            <br></br>
-                            <Link to={`/assignbookteacher/${encodeId(item.teacher_id)}`}>
-                              <button className="btn btn-sm btn-secondary mt-1">
-                                Assign Books
-                              </button>
-                            </Link>
-                            <br></br>
-                            <button
-                              className="btn btn-sm btn-danger mt-1"
-                              onClick={() => handleDelete(item.teacher_id)}
-                            >
-                              Delete
-                            </button>
-                          </td>
+  <Link to={`/updateteacher/${encodeId(item.teacher_id)}`}>
+    <button className="btn btn-sm btn-secondary">
+     Edit
+    </button>
+  </Link>
+  <br />
+  <Link to={`/assignbookteacher/${encodeId(item.teacher_id)}`}>
+    <button className="btn btn-sm btn-secondary mt-1">
+      Assign Books
+    </button>
+  </Link>
+  <br />
+  <button
+    className="btn btn-sm btn-danger mt-1"
+    onClick={() => handleDelete(item.teacher_id)}
+  >
+    Delete
+  </button>
+</td>
+
                         </tr>
                       ))}
                     </tbody>

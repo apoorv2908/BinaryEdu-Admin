@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 import Topbar from '../../Dashboard/Topbar';
 import config from '../../Access/config';
 
 const Addsubjects = () => {
   const [subjectName, setSubjectName] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-  const [showPopup, setShowPopup] = useState(false);
+  const [subjectContent, setSubjectContent] = useState(''); // State for subject content
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -17,7 +18,7 @@ const Addsubjects = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ subjectName }),
+        body: JSON.stringify({ subjectName, subjectContent }), // Sending both subjectName and subjectContent
       });
       const data = await response.json();
       if (data.success) {
@@ -44,20 +45,31 @@ const Addsubjects = () => {
               {/* Topbar */}
               <div className="row">
                 <div className="col-md-12 bg-white shadow-lg p-3 mb-5 bg-white rounded">
-                <div className='text-grey h6'>Add Subject</div>
-                <hr></hr>
+                  <div className='text-grey h6 fw-bold'>Add Subject</div>
+                  <hr></hr>
                   <form onSubmit={handleSubmit}>
-                    <label className= 'fw-bold'>Subject*</label><br />
+                    <label className='fw-bold'>Subject<span className='text-danger'>*</span></label><br />
                     <input
-                      className='custom-input mt-3 cursor'
+                      className='custom-input mt-1 cursor'
                       placeholder='Enter Subject Name'
                       value={subjectName}
                       onChange={(e) => setSubjectName(e.target.value)}
-                      required= "true"
+                      required
                     /><br /><br></br>
-                    <div className= 'd-flex justify-content-end'>
+
+                    {/* Quill Editor for adding subject content */}
+                    <label className='fw-bold'>Subject Content</label><br />
+                    <ReactQuill
+                      value={subjectContent}
+                      onChange={setSubjectContent}
+                      placeholder="Enter Subject Content"
+                      className='mt-1 cursor'
+                      required
+                    /><br /><br></br>
+
+                    <div className='d-flex justify-content-end'>
                       <button type="submit" className="btn btn-primary mt-3 mx-3">Add Subject</button>
-                      <Link to = "/subjects"><button className="btn btn-danger mt-3">Cancel</button></Link>
+                      <Link to="/subjects"><button className="btn btn-danger mt-3">Cancel</button></Link>
                     </div>
                   </form>
                 </div>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import config from '../Access/config';
 import Topbar from '../Dashboard/Topbar';
-import synclogo from "./Assets/synclogo.png"
-import "./Styles/managebookpages.css"
+import synclogo from "./Assets/synclogo.png";
+import "./Styles/managebookpages.css";
 import { decodeId } from '../Access/Encodedecode';
 
 const Managebookpages = () => {
@@ -15,11 +15,12 @@ const Managebookpages = () => {
   const [total, setTotal] = useState(0);
   const [limit, setLimit] = useState(10);
   const [sortOption, setSortOption] = useState('page_number_asc');
-
   const [editInputs, setEditInputs] = useState({});
+  const [bookName, setBookName] = useState('');
 
   useEffect(() => {
     fetchBookPages();
+    fetchBookName();
   }, [searchQuery, page, limit, book_id, sortOption]);
 
   const fetchBookPages = async () => {
@@ -35,6 +36,45 @@ const Managebookpages = () => {
     } catch (error) {
       console.error('Error:', error);
       alert('Error fetching book pages');
+    }
+  };
+
+  const fetchBookName = async () => {
+    try {
+      const response = await fetch(`${config.apiBaseUrl}/fullmarks-server/Resources/fetchbookdetails.php?book_id=${decodedId}`);
+      const data = await response.json();
+      if (data.success) {
+        setBookName(data.book.book_name);
+      } else {
+        alert('Failed to fetch book details');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error fetching book details');
+    }
+  };
+
+  const handleDeletePage = async (pageId) => {
+    if (window.confirm('Are you sure you want to delete this page?')) {
+      try {
+        const response = await fetch(`${config.apiBaseUrl}/fullmarks-server/Resources/deletebookpage.php`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ page_id: pageId }),
+        });
+        const data = await response.json();
+        if (data.success) {
+          alert('Page deleted successfully');
+          fetchBookPages();
+        } else {
+          alert('Failed to delete page');
+        }
+      } catch (error) {
+        console.error('Error deleting page:', error);
+        alert('Error deleting page');
+      }
     }
   };
 
@@ -102,38 +142,49 @@ const Managebookpages = () => {
           <Topbar />
           <div className="col-md-12">
             <div className="container mt-3 bg-white shadow-lg p-3 mb-5 bg-white rounded">
-              <div className="row d-flex justify-content-end align-items-center">
-                <div className='text-grey fw-bold'>Manage Book Pages</div>
-                <div className="col-md-2 d-flex justify-content-between">
-                  <select className="form-control" value={sortOption} onChange={handleSortChange}>
-                    <option value="">--Sort--</option>
-                    <option value="page_number_asc">Page Number (Asc)</option>
-                    <option value="page_number_desc">Page Number (Desc)</option>
-                  </select>
-                </div>
+              <div className="row d-flex justify-content-between align-items-center">
+                <div className="text-grey fw-bold mb-2 ">Manage Book Pages: {bookName}</div>
+                <hr></hr>
+                <div className='d-flex justify-content-end gap-3'>
                 <div className="col-md-2">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search by page title"
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                  />
+                  <label htmlFor="limitSelect">Show</label>
+                  <select
+                    id="limitSelect"
+                    value={limit}
+                    className="form-select d-inline-block mx-1"
+                    style={{ width: '90px' }}
+                    onChange={handleLimitChange}
+                  >
+                    <option value={10}>10</option>
+                    <option value={25}>25</option>
+                    <option value={50}>50</option>
+                    <option value={100}>100</option>
+                  </select>
+                  entries
+                </div>
+                  <div className="col-md-2">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Search Pages"
+                      value={searchQuery}
+                      onChange={handleSearchChange}
+                    />
+                  </div>
                 </div>
               </div>
-              <hr></hr>
               <div className="row mt-3">
                 <div className="col-md-12">
                   <table className="table table-bordered">
-                    <thead>
+                    <thead className="table-light">
                       <tr>
-                        <th scope="col">SNo</th>
+                        <th scope="col">S.no.</th>
                         <th scope="col">Page Title</th>
                         <th scope="col">Page Number</th>
                         <th scope="col">Chapter Name</th>
                         <th scope="col">Book Name</th>
-                        <th scope="col">Image</th>
-
+                        <th scope="col">Page Image</th>
+                        <th scope="col">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -141,28 +192,49 @@ const Managebookpages = () => {
                         <tr key={item.page_id} className={index % 2 === 0 ? 'table-hover' : ''}>
                           <td>{getSNo(index)}</td>
                           <td>{item.page_title}</td>
-                          <td className= 'd-flex'>
+                          <td className="d-flex">
                             <input
                               type="number"
                               className="form-control small-input"
                               value={editInputs[item.page_id] || item.page_number}
                               onChange={(e) => handleNewPageNumberChange(item.page_id, e.target.value)}
+                            placeholder='Enter the preffered page number'
                             />
-                            <img src= {synclogo} onClick={() => savePageNumber(item.page_id)} className= 'synclogo cursor mx-2 mt-1'></img>                          </td>
+                            <img
+                              src={synclogo}
+                              onClick={() => savePageNumber(item.page_id)}
+                              className="synclogo cursor mx-2 mt-1"
+                              alt="Save"
+                            />
+                          </td>
                           <td>{item.chapter_name}</td>
                           <td>{item.book_name}</td>
                           <td>
                             {item.image_path && (
-                              <img src={`${config.apiBaseUrl}/fullmarks-server/uploads/book_pages/${item.image_path}`} alt="Resource" style={{ width: '50px', height: '50px'}} />
+                              <img
+                                src={`${config.apiBaseUrl}/fullmarks-server/uploads/book_pages/${item.image_path}`}
+                                alt="Resource"
+                                style={{ width: '50px', height: '50px' }}
+                              />
                             )}
                           </td>
-                          
+                          <td>
+                            <Link to={`/updatebookpage/${item.page_id}`}>
+                              <button className="btn btn-sm btn-info mr-2 mx-3">Edit</button>
+                            </Link>
+                            <button
+                              className="btn btn-sm btn-danger"
+                              onClick={() => handleDeletePage(item.page_id)}
+                            >
+                              Delete
+                            </button>
+                          </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                   {bookPages.length === 0 && <p>No book pages found.</p>}
-                  <div className='d-flex justify-content-between'>
+                  <div className="d-flex justify-content-between">
                     <div>
                       Showing <b>{firstEntry}</b> to <b>{lastEntry}</b> of <b>{total}</b> total entries
                     </div>
@@ -185,6 +257,7 @@ const Managebookpages = () => {
                     </nav>
                   </div>
                 </div>
+                
               </div>
             </div>
           </div>
